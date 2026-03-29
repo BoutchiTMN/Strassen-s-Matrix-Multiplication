@@ -392,6 +392,7 @@ tbody tr:hover{background:rgba(108,138,255,.04)}
 <nav class="top-tabs">
   <button class="top-tab active" data-tab="strassen"><span class="tab-icon" style="background:var(--green)"></span>Strassen Method</button>
   <button class="top-tab" data-tab="naive"><span class="tab-icon" style="background:var(--red)"></span>Naive Method</button>
+  <button class="top-tab" data-tab="naiverecur"><span class="tab-icon" style="background:var(--orange)"></span>Naive Recursive</button>
   <button class="top-tab" data-tab="comparison"><span class="tab-icon" style="background:var(--accent)"></span>Comparison</button>
 </nav>
 
@@ -494,6 +495,32 @@ tbody tr:hover{background:rgba(108,138,255,.04)}
         </div>
         <div class="progress-wrap"><div class="progress-bar"><div class="fill" id="progressFillN" style="width:0%"></div></div>
           <div class="progress-label"><span id="progressStepN">Step 0/0</span><span id="progressPctN">0%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Per-tab: Naive Recursive Playback -->
+    <div class="sidebar-tab-section" data-sidebar="naiverecur">
+      <div class="card" style="margin-top:12px">
+        <div class="card-header"><div class="icon icon-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><h2>Recursive Playback</h2></div>
+        <div class="playback-toolbar">
+          <button class="btn btn-primary" id="btnBuildR">Build</button>
+          <button class="btn btn-secondary" id="btnStepR" disabled>Step</button>
+          <button class="btn btn-success" id="btnPlayR" disabled>Play</button>
+          <button class="btn btn-warn" id="btnPauseR" disabled>Pause</button>
+          <button class="btn btn-danger" id="btnResetR" disabled>Reset</button>
+        </div>
+        <div class="speed-slider-wrap">
+          <div class="speed-slider-header"><label>Speed</label><span class="speed-value-badge" id="speedBadgeR">1x</span></div>
+          <input type="range" class="speed-slider" id="speedSliderR" min="0.25" max="4" step="0.25" value="1">
+          <div class="speed-ms-label" id="speedMsR">800 ms/step</div>
+        </div>
+        <div class="status-strip">
+          <div class="status-left"><span class="status-dot idle" id="statusDotR"></span><span class="status-text idle" id="statusTextR">Idle</span></div>
+          <div class="status-right"><span class="step-counter" id="stepCounterR">Step 0/0</span></div>
+        </div>
+        <div class="progress-wrap"><div class="progress-bar"><div class="fill" id="progressFillR" style="width:0%"></div></div>
+          <div class="progress-label"><span id="progressStepR">Step 0/0</span><span id="progressPctR">0%</span></div>
         </div>
       </div>
     </div>
@@ -760,6 +787,81 @@ tbody tr:hover{background:rgba(108,138,255,.04)}
       </div>
     </div>
 
+    <!-- ╔═══════════════ TAB: NAIVE RECURSIVE ═══════════════╗ -->
+    <div class="tab-content" data-tab-content="naiverecur">
+      <div class="viz-container" id="vizR"><div class="placeholder-msg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><line x1="12" y1="8" x2="5" y2="16"/><line x1="12" y1="8" x2="19" y2="16"/></svg><p>Naive Recursive Visualization</p><span>Click <strong>Build</strong> then <strong>Step</strong> or <strong>Play</strong></span></div></div>
+
+      <div class="panel-row" style="margin-top:16px">
+        <div class="card"><div class="card-header"><div class="icon icon-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><h2>Current Step</h2></div>
+          <div class="step-box" id="stepExplainR"><div class="step-number">—</div><div class="step-content"><h3>Waiting to start</h3><p class="step-explain">Click Build Steps to begin.</p></div></div>
+        </div>
+        <div class="card"><div class="card-header"><div class="icon icon-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><h2>Pseudocode</h2></div>
+          <div class="pseudocode" id="pseudocodeR">
+            <div class="line" data-line="1" data-tip="Entry: recursively multiply two n×n matrices using 8 sub-products"><span class="line-num">1</span><span class="line-code"><span class="kw">function</span> <span class="fn">rec_naive</span>(A, B, n):</span></div>
+            <div class="line" data-line="2" data-tip="Base case: if 1×1, multiply scalars"><span class="line-num">2</span><span class="line-code">  <span class="kw">if</span> n <span class="op">==</span> 1: <span class="kw">return</span> A[0][0]<span class="op">*</span>B[0][0]</span></div>
+            <div class="line" data-line="3" data-tip="Split into 4 quadrants"><span class="line-num">3</span><span class="line-code">  <span class="cm">// Split into quadrants</span></span></div>
+            <div class="line" data-line="4" data-tip="Partition A into A11,A12,A21,A22"><span class="line-num">4</span><span class="line-code">  A11,A12,A21,A22 <span class="op">=</span> split(A)</span></div>
+            <div class="line" data-line="5" data-tip="Partition B into B11,B12,B21,B22"><span class="line-num">5</span><span class="line-code">  B11,B12,B21,B22 <span class="op">=</span> split(B)</span></div>
+            <div class="line" data-line="6" data-tip="8 recursive multiplications — standard block formula"><span class="line-num">6</span><span class="line-code">  <span class="cm">// 8 recursive multiplications</span></span></div>
+            <div class="line" data-line="7" data-tip="C11 = A11×B11 + A12×B21"><span class="line-num">7</span><span class="line-code">  C11<span class="op">=</span><span class="fn">rec_naive</span>(A11,B11)<span class="op">+</span><span class="fn">rec_naive</span>(A12,B21)</span></div>
+            <div class="line" data-line="8" data-tip="C12 = A11×B12 + A12×B22"><span class="line-num">8</span><span class="line-code">  C12<span class="op">=</span><span class="fn">rec_naive</span>(A11,B12)<span class="op">+</span><span class="fn">rec_naive</span>(A12,B22)</span></div>
+            <div class="line" data-line="9" data-tip="C21 = A21×B11 + A22×B21"><span class="line-num">9</span><span class="line-code">  C21<span class="op">=</span><span class="fn">rec_naive</span>(A21,B11)<span class="op">+</span><span class="fn">rec_naive</span>(A22,B21)</span></div>
+            <div class="line" data-line="10" data-tip="C22 = A21×B12 + A22×B22"><span class="line-num">10</span><span class="line-code">  C22<span class="op">=</span><span class="fn">rec_naive</span>(A21,B12)<span class="op">+</span><span class="fn">rec_naive</span>(A22,B22)</span></div>
+            <div class="line" data-line="11" data-tip="Join quadrants into result"><span class="line-num">11</span><span class="line-code">  <span class="kw">return</span> combine(C11,C12,C21,C22)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Counters -->
+      <div class="card" style="margin-top:16px"><div class="card-header"><div class="icon icon-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><h2>Live Counters</h2><span class="tag">Recursive</span></div>
+        <div class="stats-grid" id="statsR">
+          <div class="stat-card" style="--stat-color:var(--yellow)"><div class="stat-value" style="color:var(--yellow)" id="rMultsV">0</div><div class="stat-label">Mults</div><div class="stat-bar-wrap"><div class="stat-bar" id="rMultsB" style="width:0%"></div></div></div>
+          <div class="stat-card" style="--stat-color:var(--green)"><div class="stat-value" style="color:var(--green)" id="rAddsV">0</div><div class="stat-label">Adds</div><div class="stat-bar-wrap"><div class="stat-bar" id="rAddsB" style="width:0%"></div></div></div>
+          <div class="stat-card" style="--stat-color:var(--purple)"><div class="stat-value" style="color:var(--purple)" id="rRecurV">0</div><div class="stat-label">Calls</div><div class="stat-bar-wrap"><div class="stat-bar" id="rRecurB" style="width:0%"></div></div></div>
+          <div class="stat-card" style="--stat-color:var(--cyan)"><div class="stat-value" style="color:var(--cyan)" id="rStepsV">0</div><div class="stat-label">Steps</div><div class="stat-bar-wrap"><div class="stat-bar" id="rStepsB" style="width:0%"></div></div></div>
+          <div class="stat-card" style="--stat-color:var(--accent)"><div class="stat-value" style="color:var(--accent)" id="rDepthV">0</div><div class="stat-label">Depth</div><div class="stat-bar-wrap"><div class="stat-bar" id="rDepthB" style="width:0%"></div></div></div>
+        </div>
+      </div>
+
+      <!-- Step Log -->
+      <div class="card" style="margin-top:16px"><div class="card-header"><div class="icon icon-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h2>Step History</h2></div>
+        <div class="step-log-wrap" id="stepLogWrapR"><table><thead><tr><th>#</th><th>Action</th><th>Description</th><th>Line</th><th>Depth</th></tr></thead><tbody id="stepLogBodyR"><tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:16px">Click <strong>Build</strong> to generate steps.</td></tr></tbody></table></div>
+      </div>
+
+      <!-- Educational Overview -->
+      <div class="card" style="margin-top:16px"><div class="card-header"><div class="icon icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><h2>How Naive Recursive Works</h2><span class="tag">Overview</span></div>
+        <div class="overview-text">
+          <div class="edu-section" style="margin-top:0">
+            <h4><span class="edu-num">1</span> The Idea</h4>
+            <p>This method uses the same <strong>divide-and-conquer</strong> structure as Strassen: split each matrix into 4 quadrants, recursively multiply sub-matrices, then combine. However, it follows the <strong>standard block multiplication formula</strong> directly, requiring <strong>8 recursive multiplications</strong> per level.</p>
+          </div>
+          <div class="edu-section">
+            <h4><span class="edu-num">2</span> The 8 Products</h4>
+            <p>Each result quadrant needs exactly 2 recursive multiplications:</p>
+            <div class="formula-box" style="text-align:left;font-size:.88rem;line-height:1.85;padding:10px 14px;margin:6px 0">
+              C<sub>11</sub> = A<sub>11</sub>&middot;B<sub>11</sub> + A<sub>12</sub>&middot;B<sub>21</sub><br>
+              C<sub>12</sub> = A<sub>11</sub>&middot;B<sub>12</sub> + A<sub>12</sub>&middot;B<sub>22</sub><br>
+              C<sub>21</sub> = A<sub>21</sub>&middot;B<sub>11</sub> + A<sub>22</sub>&middot;B<sub>21</sub><br>
+              C<sub>22</sub> = A<sub>21</sub>&middot;B<sub>12</sub> + A<sub>22</sub>&middot;B<sub>22</sub>
+            </div>
+          </div>
+          <div class="edu-section">
+            <h4><span class="edu-num">3</span> Complexity</h4>
+            <div class="formula-box" style="margin:6px 0">T(n) = 8&middot;T(n/2) + O(n&sup2;) &rArr; O(n<sup>3</sup>)</div>
+            <p>With 8 sub-problems (vs Strassen's 7), the exponent remains log<sub>2</sub>8 = 3. This is asymptotically the same as the triple-loop naive method, but uses recursion and more memory.</p>
+          </div>
+          <div class="edu-section">
+            <h4><span class="edu-num">4</span> Why Study It?</h4>
+            <ul style="margin:4px 0 0 18px;font-size:.9rem;color:var(--text-secondary);line-height:1.75">
+              <li>It shows the <strong>baseline</strong> for divide-and-conquer matrix multiplication.</li>
+              <li>Comparing 8 vs 7 products makes Strassen's improvement concrete and measurable.</li>
+              <li>It demonstrates that recursion alone doesn't improve complexity — the <strong>reduction in sub-problems</strong> is what matters.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ╔═══════════════ TAB: COMPARISON ═══════════════╗ -->
     <div class="tab-content" data-tab-content="comparison">
       <!-- VS Header -->
@@ -862,8 +964,9 @@ let activeTab = 'strassen';
 function createEngine(type) {
   return { type, steps:[], result:null, stepIdx:-1, state:'idle', timer:null, tree:null };
 }
-const SE = createEngine('strassen'); // Strassen engine
-const NE = createEngine('naive');    // Naive engine
+const SE = createEngine('strassen');   // Strassen engine
+const NE = createEngine('naive');      // Naive iterative engine
+const RE = createEngine('naiverecur');// Naive recursive engine
 
 // Presets
 // Helper: generate deterministic n×n matrix from seed
@@ -1066,13 +1169,82 @@ function naiveGenSteps(A,B,steps){
 }
 
 // ═══════════════════════════════════════════════════════════════════════
+//  NAIVE RECURSIVE STEP GENERATION
+// ═══════════════════════════════════════════════════════════════════════
+// 8 sub-products: standard block formula C_ij = sum_k A_ik * B_kj for blocks
+const RPRODS=[
+  {cq:'C11',left:'A11',right:'B11',pcl:7,idx:0},
+  {cq:'C11',left:'A12',right:'B21',pcl:7,idx:1},
+  {cq:'C12',left:'A11',right:'B12',pcl:8,idx:2},
+  {cq:'C12',left:'A12',right:'B22',pcl:8,idx:3},
+  {cq:'C21',left:'A21',right:'B11',pcl:9,idx:4},
+  {cq:'C21',left:'A22',right:'B21',pcl:9,idx:5},
+  {cq:'C22',left:'A21',right:'B12',pcl:10,idx:6},
+  {cq:'C22',left:'A22',right:'B22',pcl:10,idx:7}
+];
+
+function naiveRecurGenSteps(A,B,depth,ctx,steps,aReg,bReg,cReg){
+  const n=A.length;
+  if(!aReg)aReg={r:0,c:0,sz:n};if(!bReg)bReg={r:0,c:0,sz:n};if(!cReg)cReg={r:0,c:0,sz:n};
+  steps.push({action:'rn_enter',pcl:1,depth,n,ctx,
+    aReg:{...aReg},bReg:{...bReg},cReg:{...cReg},
+    explain:`Enter rec_naive(${n}\u00d7${n}) \u2014 ${ctx}.`});
+  if(n===1){
+    const v=A[0][0]*B[0][0];
+    steps.push({action:'rn_base',pcl:2,depth,n:1,result:[[v]],
+      scalar:{l:A[0][0],r:B[0][0],p:v},ctx,
+      aReg:{...aReg},bReg:{...bReg},cReg:{...cReg},
+      explain:`Base: ${A[0][0]} \u00d7 ${B[0][0]} = ${v}.`});
+    return[[v]];
+  }
+  const h=n/2;
+  const qA=matSplit(A),qB=matSplit(B);
+  const QN={A11:qA.M11,A12:qA.M12,A21:qA.M21,A22:qA.M22,B11:qB.M11,B12:qB.M12,B21:qB.M21,B22:qB.M22};
+  const qrA={A11:{r:aReg.r,c:aReg.c,sz:h},A12:{r:aReg.r,c:aReg.c+h,sz:h},A21:{r:aReg.r+h,c:aReg.c,sz:h},A22:{r:aReg.r+h,c:aReg.c+h,sz:h}};
+  const qrB={B11:{r:bReg.r,c:bReg.c,sz:h},B12:{r:bReg.r,c:bReg.c+h,sz:h},B21:{r:bReg.r+h,c:bReg.c,sz:h},B22:{r:bReg.r+h,c:bReg.c+h,sz:h}};
+  const qrC={C11:{r:cReg.r,c:cReg.c,sz:h},C12:{r:cReg.r,c:cReg.c+h,sz:h},C21:{r:cReg.r+h,c:cReg.c,sz:h},C22:{r:cReg.r+h,c:cReg.c+h,sz:h}};
+  steps.push({action:'rn_split',pcl:4,depth,n,ctx,
+    aReg:{...aReg},bReg:{...bReg},cReg:{...cReg},qrA,qrB,qrC,
+    explain:`Split ${n}\u00d7${n} into ${h}\u00d7${h} quadrants.`});
+  // 8 recursive products, grouped into 4 result quadrants
+  const prods=[];// stores {result, cq, left, right}
+  for(const rp of RPRODS){
+    const lMat=QN[rp.left],rMat=QN[rp.right];
+    const aR=qrA[rp.left]||qrA['A11'],bR=qrB[rp.right]||qrB['B11'];
+    steps.push({action:'rn_multiply',pcl:rp.pcl,depth,cq:rp.cq,left:rp.left,right:rp.right,idx:rp.idx,
+      aRegs:[aR],bRegs:[bR],cTargetReg:qrC[rp.cq],
+      aReg:{...aReg},bReg:{...bReg},cReg:{...cReg},
+      explain:`Computing ${rp.left} \u00d7 ${rp.right} for ${rp.cq}.`});
+    const res=naiveRecurGenSteps(lMat,rMat,depth+1,`${rp.left}\u00d7${rp.right} (depth ${depth+1})`,steps,aR,bR,qrC[rp.cq]);
+    prods.push({result:res,cq:rp.cq,left:rp.left,right:rp.right});
+    steps.push({action:'rn_prod_done',pcl:rp.pcl,depth,cq:rp.cq,left:rp.left,right:rp.right,idx:rp.idx,
+      result:matClone(res),aRegs:[aR],bRegs:[bR],cTargetReg:qrC[rp.cq],
+      aReg:{...aReg},bReg:{...bReg},cReg:{...cReg},
+      explain:`${rp.left}\u00d7${rp.right} = ${matStr(res)}.`});
+  }
+  // Combine: C_ij = first_product + second_product
+  const pairs=[['C11',0,1],['C12',2,3],['C21',4,5],['C22',6,7]];
+  const CQ=[];
+  for(const[cq,i1,i2]of pairs){
+    const Cq=matAdd(prods[i1].result,prods[i2].result);CQ.push(Cq);
+    const pcl={C11:7,C12:8,C21:9,C22:10}[cq];
+    steps.push({action:'rn_combine',pcl,depth,quadrant:cq,
+      left1:prods[i1].left+'\u00d7'+prods[i1].right,left2:prods[i2].left+'\u00d7'+prods[i2].right,
+      result:matClone(Cq),cTargetReg:qrC[cq],cReg:{...cReg},
+      explain:`${cq} = ${prods[i1].left}\u00d7${prods[i1].right} + ${prods[i2].left}\u00d7${prods[i2].right} = ${matStr(Cq)}.`});
+  }
+  const C=matJoin(CQ[0],CQ[1],CQ[2],CQ[3]);
+  steps.push({action:'rn_join',pcl:11,depth,n,result:matClone(C),cReg:{...cReg},
+    explain:`Join quadrants into ${n}\u00d7${n} result.`});
+  return C;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
 //  ENGINE OPERATIONS (shared logic, parameterized by engine)
 // ═══════════════════════════════════════════════════════════════════════
 // Element lookup helper: maps short id to suffixed DOM element
-function el(eng,id){
-  const suf=eng.type==='strassen'?'S':'N';
-  return document.getElementById(id+suf);
-}
+function engSuf(eng){return eng.type==='strassen'?'S':eng.type==='naive'?'N':'R'}
+function el(eng,id){return document.getElementById(id+engSuf(eng))}
 
 function getDelay(eng){
   const slider=el(eng,'speedSlider');
@@ -1082,7 +1254,7 @@ function getDelay(eng){
 
 function setEngineState(eng,newState){
   eng.state=newState;
-  const suf=eng.type==='strassen'?'S':'N';
+  const suf=engSuf(eng);
   const dot=document.getElementById('statusDot'+suf);
   const txt=document.getElementById('statusText'+suf);
   const labels={idle:'Idle',ready:'Ready',playing:'Playing',paused:'Paused',done:'Done'};
@@ -1102,7 +1274,7 @@ function setEngineState(eng,newState){
 }
 
 function updateProgress(eng){
-  const suf=eng.type==='strassen'?'S':'N';
+  const suf=engSuf(eng);
   const total=eng.steps.length;
   const shown=eng.stepIdx+1;
   const pct=total>0?Math.round(shown/total*100):0;
@@ -1147,9 +1319,10 @@ function resetEngine(eng){
   eng.steps=[];eng.result=null;eng.stepIdx=-1;eng.tree=null;
   updateProgress(eng);
   setEngineState(eng,'idle');
-  const suf=eng.type==='strassen'?'S':'N';
+  const suf=engSuf(eng);
   // Reset viz
-  document.getElementById('viz'+suf).innerHTML=`<div class="placeholder-msg"><p>${eng.type==='strassen'?'Strassen':'Naive'} Visualization</p><span>Click <strong>Build</strong> then <strong>Step</strong> or <strong>Play</strong></span></div>`;
+  const engNames={strassen:'Strassen',naive:'Naive',naiverecur:'Naive Recursive'};
+  document.getElementById('viz'+suf).innerHTML=`<div class="placeholder-msg"><p>${engNames[eng.type]||eng.type} Visualization</p><span>Click <strong>Build</strong> then <strong>Step</strong> or <strong>Play</strong></span></div>`;
   // Reset explanation
   document.getElementById('stepExplain'+suf).innerHTML='<div class="step-number">\u2014</div><div class="step-content"><h3>Waiting to start</h3><p class="step-explain">Click Build to begin.</p></div>';
   // Reset pseudocode
@@ -1179,6 +1352,8 @@ function buildSteps(eng){
     buildRecursionTree(eng);
     renderRecursionTree(eng,null);
     updateProductsSummary(eng,null);
+  } else if(eng.type==='naiverecur'){
+    eng.result=naiveRecurGenSteps(A,B,0,'top-level',eng.steps);
   } else {
     eng.result=naiveGenSteps(A,B,eng.steps);
   }
@@ -1186,9 +1361,9 @@ function buildSteps(eng){
   buildStepLog(eng);
   updateProgress(eng);
   setEngineState(eng,'ready');
-  // Show initial SVG
   renderInitialViz(eng);
-  flashValidation('success',`Built ${eng.steps.length} steps for ${eng.type==='strassen'?'Strassen':'Naive'}.`);
+  const names={strassen:'Strassen',naive:'Naive',naiverecur:'Naive Recursive'};
+  flashValidation('success',`Built ${eng.steps.length} steps for ${names[eng.type]||eng.type}.`);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -1197,7 +1372,7 @@ function buildSteps(eng){
 function renderStep(eng){
   if(eng.stepIdx<0||eng.stepIdx>=eng.steps.length)return;
   const step=eng.steps[eng.stepIdx];
-  const suf=eng.type==='strassen'?'S':'N';
+  const suf=engSuf(eng);
   // Pseudocode highlight — scroll only inside the pseudocode container, never the page
   const pcContainer=document.getElementById('pseudocode'+suf);
   const pcLines=pcContainer.querySelectorAll('.line');
@@ -1219,6 +1394,8 @@ function renderStep(eng){
     renderStrassenSvg(eng,step);
     updateProductsSummary(eng,step);
     updateRecursionTree(eng);
+  } else if(eng.type==='naiverecur'){
+    renderNaiveRecurSvg(eng,step);
   } else {
     renderNaiveSvg(eng,step);
   }
@@ -1228,7 +1405,9 @@ function stepTitle(eng,step){
   const titles={strassen_enter:'Enter Strassen',base_case:'Base Case',split:'Split Matrices',
     prepare_product:'Prepare Product',product_complete:'Product Done',combine_quadrant:'Combine',
     join:'Join Result',naive_start:'Begin',naive_init:'Initialize',naive_cell_start:'Start Cell',
-    naive_multiply:'Multiply & Add',naive_cell_done:'Cell Done',naive_complete:'Complete'};
+    naive_multiply:'Multiply & Add',naive_cell_done:'Cell Done',naive_complete:'Complete',
+    rn_enter:'Enter Recursive',rn_base:'Base Case',rn_split:'Split Matrices',
+    rn_multiply:'Recursive Multiply',rn_prod_done:'Product Done',rn_combine:'Combine Quadrant',rn_join:'Join Result'};
   let t=titles[step.action]||step.action;
   if(step.product){const p=pcFor(step.product);t+=' \u2014 '+(p?p.label:step.product)}
   if(step.quadrant)t+=' \u2014 '+step.quadrant;
@@ -1248,6 +1427,7 @@ function stepFormula(eng,step){
 
 function renderInitialViz(eng){
   if(eng.type==='strassen')renderStrassenSvg(eng,null);
+  else if(eng.type==='naiverecur')renderNaiveRecurSvg(eng,null);
   else renderNaiveSvg(eng,null);
 }
 
@@ -1687,16 +1867,100 @@ function buildNaiveMatrixSvg(A,B,C,n,aHL,bHL,cHL,info,step){
 }
 
 // ═══════════════════════════════════════════════════════════════════════
+//  SVG RENDERING — NAIVE RECURSIVE (reuses Strassen-style region highlighting)
+// ═══════════════════════════════════════════════════════════════════════
+function renderNaiveRecurSvg(eng,step){
+  if(!eng.inputA)return;
+  const viz=document.getElementById('vizR');
+  const n=currentSize,A=eng.inputA,B=eng.inputB;
+  const C=matZeros(n);
+  // Only commit finalized results from depth-0 combine or join
+  if(step)for(let i=0;i<=eng.stepIdx;i++){const s=eng.steps[i];
+    if(s.action==='rn_combine'&&s.depth===0&&s.cTargetReg&&s.result){
+      const rg=s.cTargetReg;for(let r=0;r<rg.sz;r++)for(let c=0;c<rg.sz;c++)C[rg.r+r][rg.c+c]=s.result[r][c]}
+    if(s.action==='rn_join'&&s.depth===0&&s.result)for(let r=0;r<n;r++)for(let c=0;c<n;c++)C[r][c]=s.result[r][c]}
+  let showPart=step!=null,info=step?step.explain:'Ready',formula='';
+  let aBoxes=[],bBoxes=[],cBoxes=[];
+  if(step){
+    const col='#f97316';// orange for naive recursive
+    // Ancestor region walk-back
+    if(step.aReg&&step.aReg.sz<n){
+      const ancestors=[];let prevDepth=step.depth;
+      for(let i=eng.stepIdx;i>=0;i--){const s=eng.steps[i];
+        if(s.action==='rn_enter'&&s.depth<prevDepth&&s.aReg){
+          ancestors.unshift({aReg:s.aReg,bReg:s.bReg,cReg:s.cReg});
+          prevDepth=s.depth;if(s.depth===0)break}}
+      for(let a=0;a<ancestors.length;a++){
+        const anc=ancestors[a],alpha=0.06+a*0.04,sw=1+a*0.3;
+        if(anc.aReg.sz<n)aBoxes.push({...anc.aReg,fill:`rgba(249,115,22,${alpha})`,stroke:'#b45309',sw});
+        if(anc.bReg.sz<n)bBoxes.push({...anc.bReg,fill:`rgba(249,115,22,${alpha})`,stroke:'#b45309',sw});
+        if(anc.cReg.sz<n)cBoxes.push({...anc.cReg,fill:`rgba(249,115,22,${alpha})`,stroke:'#b45309',sw});
+      }
+    }
+    // Current step highlights
+    if((step.action==='rn_multiply'||step.action==='rn_prod_done')&&step.aRegs){
+      for(const rg of step.aRegs)aBoxes.push({...rg,fill:'rgba(249,115,22,0.18)',stroke:col,sw:2});
+      for(const rg of step.bRegs)bBoxes.push({...rg,fill:'rgba(249,115,22,0.18)',stroke:col,sw:2});
+      if(step.cTargetReg)cBoxes.push({...step.cTargetReg,fill:'rgba(52,211,153,0.1)',stroke:'#34d399',sw:1.5});
+      formula=`${step.left} \u00d7 ${step.right} \u2192 ${step.cq}`;
+    }
+    if(step.action==='rn_base'&&step.aReg){
+      aBoxes.push({...step.aReg,fill:'rgba(251,191,36,0.2)',stroke:'#fbbf24',sw:2});
+      bBoxes.push({...step.bReg,fill:'rgba(251,191,36,0.2)',stroke:'#fbbf24',sw:2});
+    }
+    if(step.action==='rn_combine'&&step.cTargetReg){
+      cBoxes.push({...step.cTargetReg,fill:'rgba(52,211,153,0.18)',stroke:'#34d399',sw:2});
+      formula=`${step.quadrant} = ${step.left1} + ${step.left2}`;
+    }
+    if(step.action==='rn_split'&&step.qrA){
+      ['A11','A12','A21','A22'].forEach(k=>aBoxes.push({...step.qrA[k],fill:'rgba(249,115,22,0.08)',stroke:'#b45309',sw:1.5}));
+      ['B11','B12','B21','B22'].forEach(k=>bBoxes.push({...step.qrB[k],fill:'rgba(249,115,22,0.08)',stroke:'#b45309',sw:1.5}));
+    }
+    if(step.action==='rn_join'&&step.cReg)cBoxes.push({...step.cReg,fill:'rgba(52,211,153,0.1)',stroke:'#34d399',sw:1.5});
+  }
+  const svgStr=buildMatrixSvgWithRegions(A,B,C,n,showPart,aBoxes,bBoxes,cBoxes,info,formula);
+  // Build operation banner
+  let banner='<div class="viz-op-banner">';
+  if(!step){banner+='<div class="math-line-xs" style="color:var(--text-muted);text-align:center;padding:6px 0">Click Build then Step or Play.</div>'}
+  else if(step.action==='rn_enter'){
+    banner+=`<div class="math-line"><span class="op-type-tag op-tag-init">ENTER</span>rec_naive(${mn(step.n)}\u00d7${mn(step.n)}) depth ${mn(step.depth)}</div>`;
+  }else if(step.action==='rn_base'&&step.scalar){
+    banner+=`<div class="math-line"><span class="op-type-tag op-tag-mult">\u00d7</span>${mn(step.scalar.l)}${mo('\u00d7')}${mn(step.scalar.r)}${meq()}${mr(step.scalar.p)}</div>`;
+  }else if(step.action==='rn_split'){
+    banner+=`<div class="math-line"><span class="op-type-tag op-tag-split">SPLIT</span>${mv('A')},${mv('B')} \u2192 4 quadrants of ${mn(step.n/2)}\u00d7${mn(step.n/2)}</div>`;
+  }else if(step.action==='rn_multiply'){
+    banner+=`<div class="math-line"><span class="op-type-tag op-tag-mult">\u00d7</span>${mi(step.left[0],step.left.slice(1))}${mo('\u00d7')}${mi(step.right[0],step.right.slice(1))}${mo('\u2192')}${mr(step.cq)}</div>`;
+  }else if(step.action==='rn_prod_done'){
+    const vs=step.result.length===1?String(step.result[0][0]):matStr(step.result);
+    banner+=`<div class="math-line"><span class="op-type-tag op-tag-result">\u2713</span>${mi(step.left[0],step.left.slice(1))}${mo('\u00d7')}${mi(step.right[0],step.right.slice(1))}${meq()}${mr(vs)}</div>`;
+  }else if(step.action==='rn_combine'){
+    const vs=step.result.length===1?String(step.result[0][0]):matStr(step.result);
+    banner+=`<div class="math-line"><span class="op-type-tag op-tag-combine">ADD</span>${mr(step.quadrant)}${meq()}${mn(step.left1)}${mo('+')}${mn(step.left2)}</div>`;
+    banner+=`<div class="math-line-sm">${meq()}${mr(vs)}</div>`;
+  }else if(step.action==='rn_join'){
+    banner+=`<div class="math-line"><span class="op-type-tag op-tag-result">JOIN</span>${mv('C')}${meq()}combine(${mi('C','11')},${mi('C','12')},${mi('C','21')},${mi('C','22')})</div>`;
+  }else{
+    banner+=`<div class="math-line-xs">${step.explain||''}</div>`;
+  }
+  banner+='</div>';
+  viz.innerHTML=svgStr+banner;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
 //  LIVE COUNTERS
 // ═══════════════════════════════════════════════════════════════════════
 function updateCounters(eng){
   if(eng.type==='strassen')updateStrassenCounters(eng);
+  else if(eng.type==='naiverecur')updateNaiveRecurCounters(eng);
   else updateNaiveCounters(eng);
 }
 function resetCounters(eng){
   if(eng.type==='strassen'){
     ['sMultsV','sAddsV','sSubsV','sRecurV','sStepsV'].forEach(id=>document.getElementById(id).textContent='0');
     ['sMultsB','sAddsB','sSubsB','sRecurB','sStepsB'].forEach(id=>document.getElementById(id).style.width='0%');
+  } else if(eng.type==='naiverecur'){
+    ['rMultsV','rAddsV','rRecurV','rStepsV','rDepthV'].forEach(id=>document.getElementById(id).textContent='0');
+    ['rMultsB','rAddsB','rRecurB','rStepsB','rDepthB'].forEach(id=>document.getElementById(id).style.width='0%');
   } else {
     ['nMultsV','nAddsV','nCellsV','nStepsV'].forEach(id=>document.getElementById(id).textContent='0');
     document.getElementById('nPctV').textContent='0%';
@@ -1745,25 +2009,48 @@ function updateNaiveCounters(eng){
   document.getElementById('nStepsB').style.width=`${total>0?shown/total*100:0}%`;
   document.getElementById('nPctB').style.width=`${totalCells>0?cells/totalCells*100:0}%`;
 }
+function updateNaiveRecurCounters(eng){
+  let mults=0,adds=0,recur=0,maxD=0;
+  for(let i=0;i<=eng.stepIdx;i++){const s=eng.steps[i];
+    if(s.action==='rn_base')mults++;
+    if(s.action==='rn_combine'){const e=s.result.length*s.result.length;adds+=e}
+    if(s.action==='rn_enter'){recur++;if(s.depth>maxD)maxD=s.depth}
+  }
+  const total=eng.steps.length,shown=eng.stepIdx+1;
+  const fm=eng.steps.filter(s=>s.action==='rn_base').length||1;
+  const fr=eng.steps.filter(s=>s.action==='rn_enter').length||1;
+  document.getElementById('rMultsV').textContent=mults;
+  document.getElementById('rAddsV').textContent=adds;
+  document.getElementById('rRecurV').textContent=recur;
+  document.getElementById('rStepsV').textContent=`${shown}/${total}`;
+  document.getElementById('rDepthV').textContent=maxD;
+  document.getElementById('rMultsB').style.width=`${Math.min(100,mults/fm*100)}%`;
+  document.getElementById('rRecurB').style.width=`${Math.min(100,recur/fr*100)}%`;
+  document.getElementById('rStepsB').style.width=`${total>0?shown/total*100:0}%`;
+  const maxDepth=Math.log2(currentSize)||1;
+  document.getElementById('rDepthB').style.width=`${Math.min(100,maxD/maxDepth*100)}%`;
+}
 
 // ═══════════════════════════════════════════════════════════════════════
 //  STEP LOG
 // ═══════════════════════════════════════════════════════════════════════
 function buildStepLog(eng){
-  const suf=eng.type==='strassen'?'S':'N';
+  const suf=engSuf(eng);
   const tbody=document.getElementById('stepLogBody'+suf);
   let html='';
   const actionMeta={strassen_enter:{l:'ENTER',c:'la-enter'},base_case:{l:'BASE',c:'la-base'},split:{l:'SPLIT',c:'la-split'},
     prepare_product:{l:'PREP',c:'la-prep'},product_complete:{l:'DONE',c:'la-done'},combine_quadrant:{l:'COMB',c:'la-combine'},
     join:{l:'JOIN',c:'la-done'},naive_start:{l:'START',c:'la-meta'},naive_init:{l:'INIT',c:'la-meta'},
     naive_cell_start:{l:'CELL',c:'la-cell'},naive_multiply:{l:'MULT',c:'la-mult'},naive_cell_done:{l:'DONE',c:'la-done'},
-    naive_complete:{l:'END',c:'la-done'}};
+    naive_complete:{l:'END',c:'la-done'},
+    rn_enter:{l:'ENTER',c:'la-enter'},rn_base:{l:'BASE',c:'la-base'},rn_split:{l:'SPLIT',c:'la-split'},
+    rn_multiply:{l:'MULT',c:'la-mult'},rn_prod_done:{l:'DONE',c:'la-done'},rn_combine:{l:'COMB',c:'la-combine'},rn_join:{l:'JOIN',c:'la-done'}};
   for(let i=0;i<eng.steps.length;i++){const s=eng.steps[i];
     const meta=actionMeta[s.action]||{l:s.action,c:'la-meta'};
     const desc=s.explain.length>50?s.explain.slice(0,49)+'\u2026':s.explain;
     const line=s.pcl!=null?s.pcl:'';
     let extra='';
-    if(eng.type==='strassen')extra=s.depth!=null?`<span class="log-depth">${s.depth}</span>`:'';
+    if(eng.type==='strassen'||eng.type==='naiverecur')extra=s.depth!=null?`<span class="log-depth">${s.depth}</span>`:'';
     else extra=s.i>=0?`${s.i+1},${s.j+1}${s.k>=0?','+String(s.k+1):''}`:'\u2014';
     html+=`<tr data-step="${i}"><td class="cell-mono">${i+1}</td><td><span class="log-action-badge ${meta.c}">${meta.l}</span></td><td class="log-explain" title="${escSvg(s.explain)}">${escSvg(desc)}</td><td class="cell-mono">${line}</td><td>${extra}</td></tr>`;
   }
@@ -1771,7 +2058,7 @@ function buildStepLog(eng){
   tbody.onclick=function(e){const row=e.target.closest('tr[data-step]');if(row)jumpToStep(eng,parseInt(row.dataset.step))};
 }
 function highlightStepLog(eng){
-  const suf=eng.type==='strassen'?'S':'N';
+  const suf=engSuf(eng);
   const tbody=document.getElementById('stepLogBody'+suf);
   const wrap=document.getElementById('stepLogWrap'+suf);
   tbody.querySelectorAll('tr').forEach(r=>r.classList.remove('log-active'));
@@ -1937,15 +2224,15 @@ function switchTab(tab){
 document.querySelectorAll('.top-tab').forEach(tab=>tab.addEventListener('click',()=>switchTab(tab.dataset.tab)));
 
 // Config
-document.getElementById('matrixSize').addEventListener('change',e=>{currentSize=parseInt(e.target.value);resetEngine(SE);resetEngine(NE);loadMatrices(DEFAULTS[currentSize].A,DEFAULTS[currentSize].B);flashValidation('info',`Switched to ${currentSize}\u00d7${currentSize}.`)});
+document.getElementById('matrixSize').addEventListener('change',e=>{currentSize=parseInt(e.target.value);resetEngine(SE);resetEngine(NE);resetEngine(RE);loadMatrices(DEFAULTS[currentSize].A,DEFAULTS[currentSize].B);flashValidation('info',`Switched to ${currentSize}\u00d7${currentSize}.`)});
 document.getElementById('btnGenerate').addEventListener('click',()=>{
-  resetEngine(SE);resetEngine(NE);
+  resetEngine(SE);resetEngine(NE);resetEngine(RE);
   const range=parseInt(document.getElementById('valueRange').value);
   const mk=()=>{const m=[];for(let r=0;r<currentSize;r++){const row=[];for(let c=0;c<currentSize;c++)row.push(Math.floor(Math.random()*range));m.push(row)}return m};
   loadMatrices(mk(),mk());flashValidation('info','Random matrices generated.')});
-document.getElementById('btnReset').addEventListener('click',()=>{resetEngine(SE);resetEngine(NE);loadMatrices(DEFAULTS[currentSize].A,DEFAULTS[currentSize].B);flashValidation('info','Reset to defaults.')});
+document.getElementById('btnReset').addEventListener('click',()=>{resetEngine(SE);resetEngine(NE);resetEngine(RE);loadMatrices(DEFAULTS[currentSize].A,DEFAULTS[currentSize].B);flashValidation('info','Reset to defaults.')});
 document.getElementById('presetBar').addEventListener('click',e=>{const btn=e.target.closest('[data-preset]');if(!btn)return;const k=btn.dataset.preset,p=PRESETS[k];if(!p||!p[currentSize])return;
-  resetEngine(SE);resetEngine(NE);loadMatrices(p[currentSize].A.map(r=>[...r]),p[currentSize].B.map(r=>[...r]));flashValidation('success',`"${btn.textContent.trim()}" loaded.`)});
+  resetEngine(SE);resetEngine(NE);resetEngine(RE);loadMatrices(p[currentSize].A.map(r=>[...r]),p[currentSize].B.map(r=>[...r]));flashValidation('success',`"${btn.textContent.trim()}" loaded.`)});
 
 // Speed sliders
 function setupSpeed(suf){
@@ -1972,6 +2259,14 @@ document.getElementById('btnStepN').addEventListener('click',()=>{if(NE.state===
 document.getElementById('btnPlayN').addEventListener('click',()=>{if(['ready','paused'].includes(NE.state))startAutoPlay(NE)});
 document.getElementById('btnPauseN').addEventListener('click',()=>{if(NE.state==='playing'){stopAutoPlay(NE);setEngineState(NE,'paused')}});
 document.getElementById('btnResetN').addEventListener('click',()=>resetEngine(NE));
+
+// Playback controls — Naive Recursive
+setupSpeed('R');
+document.getElementById('btnBuildR').addEventListener('click',()=>buildSteps(RE));
+document.getElementById('btnStepR').addEventListener('click',()=>{if(RE.state==='playing'){stopAutoPlay(RE);setEngineState(RE,'paused')}if(['ready','paused'].includes(RE.state)){if(!advanceStep(RE))setEngineState(RE,'done');else if(RE.state!=='done')setEngineState(RE,'paused')}});
+document.getElementById('btnPlayR').addEventListener('click',()=>{if(['ready','paused'].includes(RE.state))startAutoPlay(RE)});
+document.getElementById('btnPauseR').addEventListener('click',()=>{if(RE.state==='playing'){stopAutoPlay(RE);setEngineState(RE,'paused')}});
+document.getElementById('btnResetR').addEventListener('click',()=>resetEngine(RE));
 
 // ═══════════════════════════════════════════════════════════════════════
 //  COMPLEXITY GRAPH (Comparison tab)
@@ -2038,8 +2333,8 @@ document.getElementById('nSlider').addEventListener('input',e=>{const n=parseInt
 //  INITIAL LOAD
 // ═══════════════════════════════════════════════════════════════════════
 loadMatrices(DEFAULTS[currentSize].A,DEFAULTS[currentSize].B);
-setEngineState(SE,'idle');setEngineState(NE,'idle');
-updateProgress(SE);updateProgress(NE);
+setEngineState(SE,'idle');setEngineState(NE,'idle');setEngineState(RE,'idle');
+updateProgress(SE);updateProgress(NE);updateProgress(RE);
 // Draw initial complexity graph
 drawGraph(64);updateExplorer(64);
 </script>
