@@ -131,6 +131,9 @@ input[type="range"].speed-slider::-moz-range-thumb{width:16px;height:16px;border
 .matrix-grid input::-webkit-outer-spin-button,.matrix-grid input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .matrix-grid input:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-glow);background:#2a2e48}
 .matrix-grid input.invalid{border-color:var(--red);box-shadow:0 0 0 2px rgba(248,113,113,.15)}
+.matrix-grid.grid-lg{gap:2px}.matrix-grid.grid-lg input{padding:3px 1px;font-size:.62rem;border-radius:3px}
+.matrix-grid.grid-xl{gap:1px}.matrix-grid.grid-xl input{padding:2px 0;font-size:.52rem;border-radius:2px}
+.matrix-grid-scroll{max-height:260px;overflow:auto;border-radius:var(--radius);border:1px solid var(--border);padding:2px}
 
 /*═══════════════════════ PRESETS ═══════════════════════*/
 .preset-bar{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
@@ -145,22 +148,44 @@ input[type="range"].speed-slider::-moz-range-thumb{width:16px;height:16px;border
 .validation-area.warn{color:var(--yellow)}.validation-area.info{color:var(--accent)}
 
 /*═══════════════════════ VIZ CONTAINER ═══════════════════════*/
-.viz-container{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);min-height:380px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.viz-container{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.viz-op-banner{width:100%;padding:8px 16px;background:rgba(15,17,23,.65);border-top:1px solid var(--border);flex-shrink:0;min-height:42px;display:flex;flex-direction:column;gap:3px;justify-content:center;animation:vizFadeIn .2s ease}
+.viz-op-banner .math-line{font-family:'Cambria Math','Times New Roman','Georgia',serif;font-size:.95rem;font-weight:400;color:var(--text-primary);line-height:1.55;overflow-x:auto;white-space:nowrap;letter-spacing:.01em}
+.viz-op-banner .math-line-sm{font-family:'Cambria Math','Times New Roman','Georgia',serif;font-size:.84rem;color:var(--text-secondary);line-height:1.45;overflow-x:auto;white-space:nowrap;letter-spacing:.01em}
+.viz-op-banner .math-line-xs{font-family:'Segoe UI',system-ui,sans-serif;font-size:.76rem;color:var(--text-muted);line-height:1.35;letter-spacing:.01em}
+.m-var{font-style:italic;color:var(--text-primary)}
+.m-idx{font-style:normal;font-size:.82em;color:var(--text-secondary);vertical-align:sub;position:relative;top:.15em}
+.m-op{color:var(--yellow);padding:0 4px;font-style:normal;font-weight:400}
+.m-eq{color:var(--text-muted);padding:0 4px;font-style:normal}
+.m-num{font-family:'Cascadia Code','Fira Code',monospace;font-weight:600;font-style:normal;color:var(--text-primary)}
+.m-res{font-family:'Cascadia Code','Fira Code',monospace;font-weight:700;font-style:normal;color:var(--green)}
+.m-pname{font-style:italic;font-weight:700}
+.m-paren{color:var(--text-secondary);font-style:normal}
+.m-accent{color:var(--accent)}
+.m-mat{font-family:'Cambria Math','Times New Roman',serif;font-weight:700;font-style:italic}
+.viz-op-banner .op-type-tag{font-family:'Segoe UI',system-ui,sans-serif;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:4px;display:inline-block;margin-right:8px;flex-shrink:0;font-style:normal}
+.op-tag-mult{background:rgba(251,191,36,.12);color:var(--yellow)}
+.op-tag-add{background:rgba(52,211,153,.12);color:var(--green)}
+.op-tag-sub{background:rgba(248,113,113,.12);color:var(--red)}
+.op-tag-split{background:rgba(167,139,250,.12);color:var(--purple)}
+.op-tag-combine{background:rgba(249,115,22,.12);color:var(--orange)}
+.op-tag-result{background:rgba(52,211,153,.12);color:var(--green)}
+.op-tag-init{background:rgba(108,138,255,.12);color:var(--accent)}
 .viz-container .placeholder-msg{text-align:center;color:var(--text-muted)}
-.viz-container .placeholder-msg svg{width:48px;height:48px;margin-bottom:12px;opacity:.35}
+.viz-container .placeholder-msg svg{width:44px;height:44px;margin-bottom:12px;opacity:.35}
 .viz-container .placeholder-msg p{font-size:.9rem;font-weight:500}
 .viz-container .placeholder-msg span{font-size:.78rem;display:block;margin-top:4px;color:var(--text-muted);opacity:.7}
 
 /*═══════════════════════ SVG VIZ ═══════════════════════*/
 .viz-svg{font-family:'Segoe UI',system-ui,sans-serif}
-.viz-title{font-size:11px;font-weight:600;fill:#8b90a0}
-.viz-mat-label{font-size:9.5px;font-weight:700;letter-spacing:.07em}
-.viz-op{font-size:20px;font-weight:700;fill:#5c6073}
+.viz-title{font-size:9.5px;font-weight:600;fill:#8b90a0}
+.viz-mat-label{font-size:8.5px;font-weight:700;letter-spacing:.07em}
+.viz-op{font-size:14px;font-weight:700;fill:#5c6073}
 .viz-cell-text{font-family:'Cascadia Code','Fira Code',monospace;font-weight:600;fill:#e2e4eb}
 .viz-cell-empty{fill:#5c6073;opacity:.45}
 .viz-cell-result{fill:#34d399}
-.viz-quad-label{font-size:8px;font-weight:700;fill:#5c6073}
-.viz-info{font-size:11px;font-weight:600;fill:#6c8aff}
+.viz-quad-label{font-size:7px;font-weight:700;fill:#5c6073}
+.viz-info{font-size:9.5px;font-weight:600;fill:#6c8aff}
 .viz-partition{opacity:.7}
 @keyframes vizFadeIn{from{opacity:0}to{opacity:1}}
 
@@ -306,8 +331,8 @@ tbody tr:hover{background:rgba(108,138,255,.04)}
 
 /*═══════════════════════ RECURSION TREE ═══════════════════════*/
 .dc-layout{display:grid;grid-template-columns:1fr 200px;gap:12px;margin-top:12px}
-.dc-tree-wrap{background:var(--bg-input);border-radius:var(--radius);padding:12px;overflow:auto;max-height:380px}
-.dc-stack-panel{background:var(--bg-input);border-radius:var(--radius);padding:12px;overflow-y:auto;max-height:380px}
+.dc-tree-wrap{background:var(--bg-input);border-radius:var(--radius);padding:14px;overflow:auto;max-height:360px}
+.dc-stack-panel{background:var(--bg-input);border-radius:var(--radius);padding:12px;overflow-y:auto;max-height:360px}
 .dc-stack-title{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);margin-bottom:8px}
 .dc-stack-empty{font-size:.8rem;color:var(--text-muted);text-align:center;padding:16px 0}
 .dc-stack-item{display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:5px;margin-bottom:3px;font-size:.78rem;color:var(--text-secondary);background:var(--bg-card);border:1px solid var(--border);transition:all .2s ease}
@@ -377,7 +402,7 @@ tbody tr:hover{background:rgba(108,138,255,.04)}
     <div class="card">
       <div class="card-header"><div class="icon icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></div><h2>Configuration</h2><span class="tag">Shared</span></div>
       <div class="form-row">
-        <div><label for="matrixSize">Matrix Size</label><select id="matrixSize"><option value="2" selected>2 &times; 2</option><option value="4">4 &times; 4</option></select></div>
+        <div><label for="matrixSize">Matrix Size</label><select id="matrixSize"><option value="2" selected>2 &times; 2</option><option value="4">4 &times; 4</option><option value="8">8 &times; 8</option><option value="16">16 &times; 16</option></select></div>
         <div><label for="valueRange">Value Range</label><select id="valueRange"><option value="10">0–9</option><option value="100" selected>0–99</option></select></div>
       </div>
       <div class="btn-group">
@@ -841,13 +866,23 @@ const SE = createEngine('strassen'); // Strassen engine
 const NE = createEngine('naive');    // Naive engine
 
 // Presets
+// Helper: generate deterministic n×n matrix from seed
+function seedMatrix(n,seed,mod){const m=[];let v=seed;for(let r=0;r<n;r++){const row=[];for(let c=0;c<n;c++){v=(v*31+7)%mod;row.push(v)}m.push(row)}return m}
+function identityN(n){const m=[];for(let r=0;r<n;r++){const row=new Array(n).fill(0);row[r]=1;m.push(row)}return m}
+function sparseN(n,seed){const m=[];let v=seed;for(let r=0;r<n;r++){const row=new Array(n).fill(0);v=(v*17+3)%n;row[v]=(v*7+r)%9+1;m.push(row)}return m}
+
 const PRESETS = {
-  identity:  {2:{A:[[1,0],[0,1]],B:[[1,0],[0,1]]},4:{A:[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]],B:[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]}},
-  fibonacci: {2:{A:[[1,1],[1,0]],B:[[1,1],[1,0]]},4:{A:[[1,1,0,0],[1,0,0,0],[0,0,1,1],[0,0,1,0]],B:[[1,1,0,0],[1,0,0,0],[0,0,1,1],[0,0,1,0]]}},
-  symmetric: {2:{A:[[4,7],[7,3]],B:[[2,5],[5,9]]},4:{A:[[5,3,1,7],[3,8,2,4],[1,2,6,9],[7,4,9,3]],B:[[2,6,4,1],[6,7,3,5],[4,3,9,8],[1,5,8,4]]}},
-  sparse:    {2:{A:[[5,0],[0,3]],B:[[0,7],[2,0]]},4:{A:[[3,0,0,5],[0,0,7,0],[0,4,0,0],[8,0,0,2]],B:[[0,0,6,0],[0,9,0,0],[1,0,0,0],[0,0,0,4]]}}
+  identity:  {2:{A:[[1,0],[0,1]],B:[[1,0],[0,1]]},4:{A:identityN(4),B:identityN(4)},8:{A:identityN(8),B:identityN(8)},16:{A:identityN(16),B:identityN(16)}},
+  fibonacci: {2:{A:[[1,1],[1,0]],B:[[1,1],[1,0]]},4:{A:[[1,1,0,0],[1,0,0,0],[0,0,1,1],[0,0,1,0]],B:[[1,1,0,0],[1,0,0,0],[0,0,1,1],[0,0,1,0]]},8:{A:seedMatrix(8,1,5),B:seedMatrix(8,3,5)},16:{A:seedMatrix(16,1,5),B:seedMatrix(16,3,5)}},
+  symmetric: {2:{A:[[4,7],[7,3]],B:[[2,5],[5,9]]},4:{A:[[5,3,1,7],[3,8,2,4],[1,2,6,9],[7,4,9,3]],B:[[2,6,4,1],[6,7,3,5],[4,3,9,8],[1,5,8,4]]},8:{A:seedMatrix(8,5,10),B:seedMatrix(8,8,10)},16:{A:seedMatrix(16,5,10),B:seedMatrix(16,8,10)}},
+  sparse:    {2:{A:[[5,0],[0,3]],B:[[0,7],[2,0]]},4:{A:[[3,0,0,5],[0,0,7,0],[0,4,0,0],[8,0,0,2]],B:[[0,0,6,0],[0,9,0,0],[1,0,0,0],[0,0,0,4]]},8:{A:sparseN(8,2),B:sparseN(8,5)},16:{A:sparseN(16,2),B:sparseN(16,5)}}
 };
-const DEFAULTS = {2:{A:[[1,3],[7,5]],B:[[6,8],[4,2]]},4:{A:[[2,5,1,8],[3,7,4,6],[9,0,2,1],[4,3,8,5]],B:[[1,4,7,3],[6,2,5,9],[8,3,0,4],[2,7,6,1]]}};
+const DEFAULTS = {
+  2:{A:[[1,3],[7,5]],B:[[6,8],[4,2]]},
+  4:{A:[[2,5,1,8],[3,7,4,6],[9,0,2,1],[4,3,8,5]],B:[[1,4,7,3],[6,2,5,9],[8,3,0,4],[2,7,6,1]]},
+  8:{A:seedMatrix(8,42,10),B:seedMatrix(8,17,10)},
+  16:{A:seedMatrix(16,42,10),B:seedMatrix(16,17,10)}
+};
 
 // P1-P7 colors for Strassen
 const PC = [
@@ -893,41 +928,110 @@ const CDEFS=[
   {label:'C22',formula:'P1-P2+P3+P6',pcl:18,fn:M=>matAdd(matAdd(matSub(M[0],M[1]),M[2]),M[5])}
 ];
 
-function strassenGenSteps(A,B,depth,ctx,steps){
+/**
+ * Region = {r, c, sz} — top-left row/col offset and size within the ORIGINAL matrix.
+ *
+ * KEY INSIGHT about Strassen regions:
+ * The left/right operands of each P-product are COMPUTED intermediates (sums/differences
+ * of quadrants), not direct sub-regions of A/B. So we can't assign a single rectangular
+ * region in A to the left operand of P1 = (A11+A22)(B11+B22).
+ *
+ * What we CAN track:
+ * - aRegs/bRegs: the source quadrant regions that feed into the current product
+ * - cReg: the C region this recursive call's result will eventually land in
+ * - For recursive calls, the child inherits properly scoped regions
+ *
+ * For P-products that use a single quadrant (identity ops like P2's right=B11,
+ * P3's left=A11, etc.), the child region IS that quadrant exactly.
+ * For combined operands (A11+A22), we highlight BOTH source quadrants.
+ */
+
+/**
+ * Compute the child region {r,c,sz} for a recursive call.
+ * regs: array of source quadrant regions involved in this operand.
+ * fallback: the parent region to use if regs is empty.
+ *
+ * The child's sz is always the same as each individual region's sz (they're all h×h).
+ * For combined operands spanning multiple quadrants, we use the centroid of the
+ * involved regions as the highlight center, keeping sz = h (the actual submatrix size).
+ * For single quadrants, we use that exact region.
+ */
+function boundingBox(regs,fallback){
+  if(!regs||regs.length===0)return{...fallback};
+  if(regs.length===1)return{...regs[0]};
+  // All source regions have the same sz (they're sibling quadrants of the same split)
+  const sz=regs[0].sz;
+  // Use the top-left of the first region as anchor — this is the minimum row/col
+  let rMin=Infinity,cMin=Infinity;
+  for(const rg of regs){if(rg.r<rMin)rMin=rg.r;if(rg.c<cMin)cMin=rg.c}
+  return{r:rMin,c:cMin,sz};
+}
+
+// Map each P-product to which C quadrants it contributes to
+const P_TO_C = {
+  M1:['C11','C22'], M2:['C21','C22'], M3:['C12','C22'],
+  M4:['C11','C21'], M5:['C11','C12'], M6:['C22'], M7:['C11']
+};
+
+function strassenGenSteps(A,B,depth,ctx,steps,aReg,bReg,cReg){
   const n=A.length;
+  if(!aReg)aReg={r:0,c:0,sz:n};if(!bReg)bReg={r:0,c:0,sz:n};if(!cReg)cReg={r:0,c:0,sz:n};
   steps.push({action:'strassen_enter',pcl:1,depth,n,A:matClone(A),B:matClone(B),ctx,
+    aReg:{...aReg},bReg:{...bReg},cReg:{...cReg},
     explain:`Enter strassen(${n}\u00d7${n}) \u2014 ${ctx}.`});
   if(n===1){
     const v=A[0][0]*B[0][0];
     steps.push({action:'base_case',pcl:2,depth,n:1,A:matClone(A),B:matClone(B),result:[[v]],
       scalar:{l:A[0][0],r:B[0][0],p:v},ctx,
+      aReg:{...aReg},bReg:{...bReg},cReg:{...cReg},
       explain:`Base: ${A[0][0]} \u00d7 ${B[0][0]} = ${v}.`});
     return[[v]];
   }
+  const h=n/2;
   const qA=matSplit(A),qB=matSplit(B);
   const Q={A11:qA.M11,A12:qA.M12,A21:qA.M21,A22:qA.M22,B11:qB.M11,B12:qB.M12,B21:qB.M21,B22:qB.M22};
-  steps.push({action:'split',pcl:4,depth,n,subs:{A11:matClone(qA.M11),A12:matClone(qA.M12),A21:matClone(qA.M21),A22:matClone(qA.M22),B11:matClone(qB.M11),B12:matClone(qB.M12),B21:matClone(qB.M21),B22:matClone(qB.M22)},ctx,
-    explain:`Split ${n}\u00d7${n} into ${n/2}\u00d7${n/2} quadrants.`});
+  // Quadrant regions relative to parent aReg/bReg/cReg (correct nesting!)
+  const qrA={A11:{r:aReg.r,c:aReg.c,sz:h},A12:{r:aReg.r,c:aReg.c+h,sz:h},A21:{r:aReg.r+h,c:aReg.c,sz:h},A22:{r:aReg.r+h,c:aReg.c+h,sz:h}};
+  const qrB={B11:{r:bReg.r,c:bReg.c,sz:h},B12:{r:bReg.r,c:bReg.c+h,sz:h},B21:{r:bReg.r+h,c:bReg.c,sz:h},B22:{r:bReg.r+h,c:bReg.c+h,sz:h}};
+  const qrC={C11:{r:cReg.r,c:cReg.c,sz:h},C12:{r:cReg.r,c:cReg.c+h,sz:h},C21:{r:cReg.r+h,c:cReg.c,sz:h},C22:{r:cReg.r+h,c:cReg.c+h,sz:h}};
+  steps.push({action:'split',pcl:4,depth,n,ctx,
+    aReg:{...aReg},bReg:{...bReg},cReg:{...cReg},qrA,qrB,qrC,
+    explain:`Split ${n}\u00d7${n} into ${h}\u00d7${h} quadrants.`});
   const MP=[];
   for(let p=0;p<7;p++){
     const d=PDEFS[p],lo=d.lOp(Q),ro=d.rOp(Q);
+    const aNames=lo.op==='id'?[lo.a]:[lo.a,lo.b],bNames=ro.op==='id'?[ro.a]:[ro.a,ro.b];
+    const aRegs=aNames.filter(x=>x.startsWith('A')).map(x=>qrA[x]).filter(Boolean);
+    const bRegs=bNames.filter(x=>x.startsWith('B')).map(x=>qrB[x]).filter(Boolean);
+    // Determine the C quadrants this product contributes to
+    const cTargets=(P_TO_C[d.label]||[]).map(k=>qrC[k]).filter(Boolean);
     steps.push({action:'prepare_product',pcl:d.pcl,depth,product:d.label,pIdx:p+1,formula:d.formula,
-      leftOp:{op:lo.op,names:lo.op==='id'?[lo.a]:[lo.a,lo.b],result:matClone(lo.r)},
-      rightOp:{op:ro.op,names:ro.op==='id'?[ro.a]:[ro.a,ro.b],result:matClone(ro.r)},ctx,
+      leftOp:{op:lo.op,names:aNames,result:matClone(lo.r)},
+      rightOp:{op:ro.op,names:bNames,result:matClone(ro.r)},ctx,
+      aReg:{...aReg},bReg:{...bReg},cReg:{...cReg},aRegs,bRegs,cTargets,
       explain:`Prepare ${d.label} = ${d.formula}.`});
-    const Mk=strassenGenSteps(lo.r,ro.r,depth+1,`${d.label} (depth ${depth+1})`,steps);
+    // Recursive call: compute child regions from the bounding box of source quadrants.
+    // For identity ops (single quad): child = that exact quadrant.
+    // For combined ops (e.g. A11+A22): child = bounding box of the involved quads.
+    const childAReg=boundingBox(aRegs,aReg);
+    const childBReg=boundingBox(bRegs,bReg);
+    const childCReg=cTargets.length?boundingBox(cTargets,cReg):{...cReg};
+    const Mk=strassenGenSteps(lo.r,ro.r,depth+1,`${d.label} (depth ${depth+1})`,steps,childAReg,childBReg,childCReg);
     MP.push(Mk);
     steps.push({action:'product_complete',pcl:d.pcl,depth,product:d.label,pIdx:p+1,formula:d.formula,
-      result:matClone(Mk),ctx,explain:`${d.label} = ${matStr(Mk)}.`});
+      result:matClone(Mk),ctx,aReg:{...aReg},bReg:{...bReg},cReg:{...cReg},aRegs,bRegs,cTargets,
+      explain:`${d.label} = ${matStr(Mk)}.`});
   }
   const CQ=[];
   for(let c=0;c<4;c++){
     const d=CDEFS[c],Cq=d.fn(MP);CQ.push(Cq);
     steps.push({action:'combine_quadrant',pcl:d.pcl,depth,quadrant:d.label,formula:d.formula,
-      result:matClone(Cq),ctx,explain:`${d.label} = ${d.formula} = ${matStr(Cq)}.`});
+      result:matClone(Cq),ctx,cReg:{...cReg},cTargetReg:qrC[d.label],
+      explain:`${d.label} = ${d.formula} = ${matStr(Cq)}.`});
   }
   const C=matJoin(CQ[0],CQ[1],CQ[2],CQ[3]);
-  steps.push({action:'join',pcl:19,depth,n,result:matClone(C),ctx,explain:`Join quadrants into ${n}\u00d7${n} result.`});
+  steps.push({action:'join',pcl:19,depth,n,result:matClone(C),ctx,cReg:{...cReg},
+    explain:`Join quadrants into ${n}\u00d7${n} result.`});
   return C;
 }
 
@@ -1135,7 +1239,6 @@ function stepFormula(eng,step){
 // ═══════════════════════════════════════════════════════════════════════
 //  SVG RENDERING — STRASSEN
 // ═══════════════════════════════════════════════════════════════════════
-const QP={A11:{qr:0,qc:0},A12:{qr:0,qc:1},A21:{qr:1,qc:0},A22:{qr:1,qc:1},B11:{qr:0,qc:0},B12:{qr:0,qc:1},B21:{qr:1,qc:0},B22:{qr:1,qc:1},C11:{qr:0,qc:0},C12:{qr:0,qc:1},C21:{qr:1,qc:0},C22:{qr:1,qc:1}};
 
 function renderInitialViz(eng){
   if(eng.type==='strassen')renderStrassenSvg(eng,null);
@@ -1146,38 +1249,238 @@ function renderStrassenSvg(eng,step){
   if(!eng.inputA)return;
   const viz=document.getElementById('vizS');
   const n=currentSize,A=eng.inputA,B=eng.inputB;
-  // Build progressive C
   const C=matZeros(n);const h=n/2;
+  // Only commit finalized results into C:
+  // - For n<=2: show combine results immediately (single recursion level, clear enough)
+  // - For n>=4: only show values after the top-level join completes,
+  //   OR after a top-level (depth 0) combine_quadrant finalizes a full quadrant
   if(step)for(let i=0;i<=eng.stepIdx;i++){const s=eng.steps[i];
-    if(s.action==='combine_quadrant'&&s.depth===0&&s.result){const q=QP[s.quadrant];if(q)for(let r=0;r<h;r++)for(let c=0;c<h;c++)C[q.qr*h+r][q.qc*h+c]=s.result[r][c]}
+    if(n<=2&&s.action==='combine_quadrant'&&s.cTargetReg&&s.result){
+      const rg=s.cTargetReg;for(let r=0;r<rg.sz;r++)for(let c=0;c<rg.sz;c++)C[rg.r+r][rg.c+c]=s.result[r][c]}
+    if(n>2&&s.action==='combine_quadrant'&&s.depth===0&&s.cTargetReg&&s.result){
+      const rg=s.cTargetReg;for(let r=0;r<rg.sz;r++)for(let c=0;c<rg.sz;c++)C[rg.r+r][rg.c+c]=s.result[r][c]}
     if(s.action==='join'&&s.depth===0&&s.result)for(let r=0;r<n;r++)for(let c=0;c<n;c++)C[r][c]=s.result[r][c]}
-  // Determine highlights
-  let showPart=false,aQuads=null,bQuads=null,cQuads=null,info='Ready',formula='';
+  // Build nested region highlights
+  let showPart=step!=null,info=step?step.explain:'Ready',formula='';
+  // regionBoxes: arrays of {r,c,sz,fill,stroke,sw} to overlay on A, B, C grids
+  let aBoxes=[],bBoxes=[],cBoxes=[];
+
   if(step){
-    info=step.explain;
-    if(['split','prepare_product','base_case','product_complete','combine_quadrant'].includes(step.action))showPart=true;
-    if(step.action==='prepare_product'&&step.depth===0){
-      const p=pcFor(step.product);
-      if(p&&step.leftOp){aQuads=step.leftOp.names.filter(n=>n.startsWith('A')).map(n=>({name:n,fill:p.fill,stroke:p.hex}))}
-      if(p&&step.rightOp){bQuads=step.rightOp.names.filter(n=>n.startsWith('B')).map(n=>({name:n,fill:p.fill,stroke:p.hex}))}
-      formula=`${p.label} = ${step.formula}`;
+    // Find the active product color by walking back through ancestors
+    let activePC=step.product?pcFor(step.product):null;
+    if(!activePC&&step.depth>0){
+      for(let i=eng.stepIdx;i>=0;i--){const s=eng.steps[i];
+        if(s.depth<step.depth&&s.product){activePC=pcFor(s.product);break}}}
+    const col=activePC?activePC.hex:'#6c8aff';
+    const fillOuter=activePC?activePC.fill:'rgba(108,138,255,0.1)';
+
+    // Collect the hierarchy of aReg/bReg from all ancestor enter steps
+    // This gives us nested boxes from outermost to innermost
+    if(step.aReg&&step.aReg.sz<n){
+      // Walk back to find all ancestor regions for nested boxes
+      const ancestors=[];let prevDepth=step.depth;
+      for(let i=eng.stepIdx;i>=0;i--){const s=eng.steps[i];
+        if(s.action==='strassen_enter'&&s.depth<prevDepth&&s.aReg){
+          ancestors.unshift({aReg:s.aReg,bReg:s.bReg,cReg:s.cReg,depth:s.depth});
+          prevDepth=s.depth;if(s.depth===0)break}}
+      // Draw ancestor boxes (outer = dimmer, inner = brighter)
+      for(let a=0;a<ancestors.length;a++){
+        const anc=ancestors[a];
+        const alpha=0.06+a*0.04;const sw=1+a*0.3;
+        if(anc.aReg.sz<n)aBoxes.push({...anc.aReg,fill:`rgba(108,138,255,${alpha})`,stroke:'#5b6eae',sw});
+        if(anc.bReg.sz<n)bBoxes.push({...anc.bReg,fill:`rgba(108,138,255,${alpha})`,stroke:'#5b6eae',sw});
+        if(anc.cReg.sz<n)cBoxes.push({...anc.cReg,fill:`rgba(108,138,255,${alpha})`,stroke:'#5b6eae',sw});
+      }
     }
-    if(step.action==='combine_quadrant'&&step.depth===0){
-      cQuads=[{name:step.quadrant,fill:'rgba(52,211,153,0.18)',stroke:'#34d399'}];
+    // Current step specific highlights
+    if(step.action==='prepare_product'&&step.aRegs){
+      for(const rg of step.aRegs)aBoxes.push({...rg,fill:fillOuter,stroke:col,sw:2});
+      for(const rg of step.bRegs)bBoxes.push({...rg,fill:fillOuter,stroke:col,sw:2});
+      if(step.cTargets)for(const rg of step.cTargets)cBoxes.push({...rg,fill:fillOuter.replace('0.18','0.08'),stroke:col,sw:1});
+      formula=`${activePC?activePC.label:step.product} = ${step.formula}`;
+    }
+    if(step.action==='product_complete'&&step.aRegs){
+      for(const rg of step.aRegs)aBoxes.push({...rg,fill:fillOuter,stroke:col,sw:1.5});
+      for(const rg of step.bRegs)bBoxes.push({...rg,fill:fillOuter,stroke:col,sw:1.5});
+      if(step.cTargets)for(const rg of step.cTargets)cBoxes.push({...rg,fill:'rgba(52,211,153,0.08)',stroke:col,sw:1});
+    }
+    if(step.action==='base_case'&&step.aReg){
+      aBoxes.push({...step.aReg,fill:'rgba(251,191,36,0.2)',stroke:'#fbbf24',sw:2});
+      bBoxes.push({...step.bReg,fill:'rgba(251,191,36,0.2)',stroke:'#fbbf24',sw:2});
+    }
+    if(step.action==='combine_quadrant'&&step.cTargetReg){
+      cBoxes.push({...step.cTargetReg,fill:'rgba(52,211,153,0.18)',stroke:'#34d399',sw:2});
       formula=`${step.quadrant} = ${step.formula}`;
     }
-    if(step.action==='join'&&step.depth===0){
-      cQuads=['C11','C12','C21','C22'].map(n=>({name:n,fill:'rgba(52,211,153,0.12)',stroke:'#34d399'}));
+    if(step.action==='join'&&step.cReg){
+      cBoxes.push({...step.cReg,fill:'rgba(52,211,153,0.1)',stroke:'#34d399',sw:1.5});
     }
-    // For deeper steps, find context
-    if(step.depth>0){showPart=true;
-      for(let i=eng.stepIdx;i>=0;i--){const s=eng.steps[i];if(s.depth===0&&s.action==='product_complete')break;
-        if(s.depth===0&&s.action==='prepare_product'){const p=pcFor(s.product);
-          if(p&&s.leftOp)aQuads=s.leftOp.names.filter(n=>n.startsWith('A')).map(n=>({name:n,fill:p.fill,stroke:p.hex}));
-          if(p&&s.rightOp)bQuads=s.rightOp.names.filter(n=>n.startsWith('B')).map(n=>({name:n,fill:p.fill,stroke:p.hex}));break}}
+    if(step.action==='split'&&step.qrA){
+      ['A11','A12','A21','A22'].forEach(k=>{const rg=step.qrA[k];aBoxes.push({...rg,fill:'rgba(108,138,255,0.08)',stroke:'#5b6eae',sw:1.5})});
+      ['B11','B12','B21','B22'].forEach(k=>{const rg=step.qrB[k];bBoxes.push({...rg,fill:'rgba(108,138,255,0.08)',stroke:'#5b6eae',sw:1.5})});
     }
   }
-  viz.innerHTML=buildMatrixSvg(A,B,C,n,showPart,aQuads,bQuads,cQuads,info,formula,true);
+  const svgStr=buildMatrixSvgWithRegions(A,B,C,n,showPart,aBoxes,bBoxes,cBoxes,info,formula);
+  const banner=buildStrassenOpBanner(eng,step);
+  viz.innerHTML=svgStr+banner;
+}
+
+/** Draw region overlay boxes using absolute row/col coordinates */
+function drawRegionBoxes(mx,my,n,cs,gap,boxes){
+  let s='';
+  for(const b of boxes){
+    const x=mx+b.c*(cs+gap)-1,y=my+b.r*(cs+gap)-1;
+    const w=b.sz*cs+(b.sz-1)*gap+2,ht=b.sz*cs+(b.sz-1)*gap+2;
+    s+=`<rect x="${x}" y="${y}" width="${w}" height="${ht}" rx="4" fill="${b.fill}" stroke="${b.stroke}" stroke-width="${b.sw}" style="animation:vizFadeIn .2s ease"/>`;
+  }
+  return s;
+}
+
+/** Matrix SVG builder that uses region-based highlighting instead of quadrant names */
+function buildMatrixSvgWithRegions(A,B,C,n,showPart,aBoxes,bBoxes,cBoxes,info,formula){
+  const cs=n<=2?32:n<=4?22:n<=8?14:8;
+  const gp=n<=8?2:1;
+  const matW=n*cs+(n-1)*gp;
+  const opW=n<=2?24:n<=4?20:n<=8?14:10,padX=n<=8?14:10;
+  const infoH=12,formulaH=formula?14:0,gapAfterInfo=6,labelH=10,gapAfterLabel=4,botH=8;
+  const topH=infoH+formulaH+gapAfterInfo+labelH+gapAfterLabel;
+  const contentW=padX*2+matW*3+opW*2,contentH=topH+matW+botH;
+  const vbPadX=Math.round(contentW*0.25),vbPadY=Math.round(contentH*0.22);
+  const vbW=contentW+vbPadX*2,vbH=contentH+vbPadY*2;
+  const ox=vbPadX,oy=vbPadY;
+  const totalW=contentW;
+  const matY=topH,ax=padX,bx=padX+matW+opW,cx=bx+matW+opW;
+  const infoY=infoH,formulaY=infoH+formulaH,labelY=infoH+formulaH+gapAfterInfo+labelH-2;
+  let svg=`<svg class="viz-svg" viewBox="0 0 ${vbW} ${vbH}" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">`;
+  svg+=`<rect width="${vbW}" height="${vbH}" fill="#1c1f2e"/>`;
+  svg+=`<g transform="translate(${ox},${oy})">`;
+  svg+=`<text x="${totalW/2}" y="${infoY}" text-anchor="middle" class="viz-title">${escSvg(info.length>70?info.slice(0,69)+'\u2026':info)}</text>`;
+  if(formula)svg+=`<text x="${totalW/2}" y="${formulaY}" text-anchor="middle" class="viz-info" font-size="8">${escSvg(formula)}</text>`;
+  svg+=`<text x="${ax+matW/2}" y="${labelY}" text-anchor="middle" class="viz-mat-label" fill="#a78bfa">A</text>`;
+  svg+=`<text x="${bx+matW/2}" y="${labelY}" text-anchor="middle" class="viz-mat-label" fill="#f97316">B</text>`;
+  svg+=`<text x="${cx+matW/2}" y="${labelY}" text-anchor="middle" class="viz-mat-label" fill="#34d399">C</text>`;
+  const opY_=matY+matW/2+3;
+  svg+=`<text x="${ax+matW+opW/2}" y="${opY_}" text-anchor="middle" class="viz-op">\u00d7</text>`;
+  svg+=`<text x="${bx+matW+opW/2}" y="${opY_}" text-anchor="middle" class="viz-op">=</text>`;
+  // Draw matrix cells
+  svg+=drawMatrix(A,ax,matY,n,cs,gp,null,showPart,'A');
+  svg+=drawMatrix(B,bx,matY,n,cs,gp,null,showPart,'B');
+  svg+=drawMatrixC(C,cx,matY,n,cs,gp,showPart);
+  // Draw region overlays (nested boxes)
+  svg+=drawRegionBoxes(ax,matY,n,cs,gp,aBoxes);
+  svg+=drawRegionBoxes(bx,matY,n,cs,gp,bBoxes);
+  svg+=drawRegionBoxes(cx,matY,n,cs,gp,cBoxes);
+  svg+='</g></svg>';
+  return svg;
+}
+
+// ── Math formatting helpers ──
+function mv(name){return`<span class="m-var">${name}</span>`} // italic variable
+function mi(base,sub){return`<span class="m-mat">${base}</span><span class="m-idx">${sub}</span>`} // matrix subscript
+function mo(op){return`<span class="m-op">${op}</span>`} // operator
+function meq(){return`<span class="m-eq">=</span>`}
+function mn(v){return`<span class="m-num">${v}</span>`} // number
+function mr(v){return`<span class="m-res">${v}</span>`} // result (green)
+function mp(v){return`<span class="m-paren">${v}</span>`} // paren
+function mpc(name,color){return`<span class="m-pname" style="color:${color}">${name}</span>`} // product name colored
+
+/** Build the operation banner HTML for Strassen (math-style) */
+function buildStrassenOpBanner(eng,step){
+  if(!step)return`<div class="viz-op-banner"><div class="math-line-xs" style="color:var(--text-muted);text-align:center;padding:6px 0">Click Build then Step or Play to see the live derivation.</div></div>`;
+  const pc=step.product?pcFor(step.product):null;
+  const pcC=pc?pc.hex:'#6c8aff';
+  let lines=[];// each: {cls:'math-line'|'math-line-sm'|'math-line-xs', tag:'', html:''}
+
+  if(step.action==='strassen_enter'){
+    lines.push({cls:'math-line',tag:'op-tag-init',tl:'ENTER',
+      h:`Strassen${mp('(')}${mv('A')},&thinsp;${mv('B')}${mp(')')}&ensp;\u2014&ensp;${mn(step.n)}\u00d7${mn(step.n)} matrices`});
+    lines.push({cls:'math-line-xs',h:step.depth>0?`Recursion depth ${mn(step.depth)}`:'Top-level call'});
+  }
+  else if(step.action==='split'){
+    const h=step.n/2;
+    lines.push({cls:'math-line',tag:'op-tag-split',tl:'SPLIT',
+      h:`${mv('A')}${mo('\u2192')}${mp('[')}${mi('A','11')},&thinsp;${mi('A','12')},&thinsp;${mi('A','21')},&thinsp;${mi('A','22')}${mp(']')}`
+       +`&emsp;${mv('B')}${mo('\u2192')}${mp('[')}${mi('B','11')},&thinsp;${mi('B','12')},&thinsp;${mi('B','21')},&thinsp;${mi('B','22')}${mp(']')}`});
+    lines.push({cls:'math-line-xs',h:`Each quadrant is ${mn(h)}\u00d7${mn(h)}`});
+  }
+  else if(step.action==='prepare_product'&&step.leftOp&&step.rightOp){
+    const lo=step.leftOp,ro=step.rightOp;
+    const pLabel=pc?pc.label:step.product;
+    function fmtOperand(op){
+      if(op.op==='id')return mi(op.names[0][0],op.names[0].slice(1));
+      const a=mi(op.names[0][0],op.names[0].slice(1)),b=mi(op.names[1][0],op.names[1].slice(1));
+      return`${mp('(')}${a}${mo(op.op==='add'?'+':'\u2212')}${b}${mp(')')}`;
+    }
+    // Line 1: symbolic formula
+    lines.push({cls:'math-line',tag:'op-tag-mult',tl:pLabel,tc:pcC,
+      h:`${mpc(pLabel,pcC)}${meq()}${fmtOperand(lo)}${mo('\u00d7')}${fmtOperand(ro)}`});
+    // Line 2: numeric substitution
+    const lv=lo.result,rv=ro.result;
+    if(lv.length===1&&rv.length===1){
+      const L=lv[0][0],R=rv[0][0];
+      // Show (a + b) = val × val = product
+      function numOp(op){
+        if(op.op==='id')return mn(op.result[0][0]);
+        const va=eng.inputA||[[0]],vb=eng.inputB||[[0]];
+        // We can't reliably recover operand values, so just show the result
+        return mn(op.result[0][0]);
+      }
+      lines.push({cls:'math-line-sm',h:`${meq()}${mn(L)}${mo('\u00d7')}${mn(R)}${meq()}${mr(L*R)}`});
+    } else {
+      lines.push({cls:'math-line-sm',h:`${meq()}${mn(matStr(lv))}${mo('\u00d7')}${mn(matStr(rv))}`});
+    }
+  }
+  else if(step.action==='base_case'&&step.scalar){
+    const{l,r,p}=step.scalar;
+    lines.push({cls:'math-line',tag:'op-tag-mult',tl:'\u00d7',
+      h:`${mn(l)}${mo('\u00d7')}${mn(r)}${meq()}${mr(p)}`});
+    lines.push({cls:'math-line-xs',h:`Scalar multiplication at depth ${mn(step.depth)}`});
+  }
+  else if(step.action==='product_complete'){
+    const pLabel=pc?pc.label:step.product;
+    const valStr=step.result.length===1?String(step.result[0][0]):matStr(step.result);
+    lines.push({cls:'math-line',tag:'op-tag-result',tl:'\u2713',tc:pcC,
+      h:`${mpc(pLabel,pcC)}${meq()}${mr(valStr)}`});
+    // Show formula reminder
+    lines.push({cls:'math-line-xs',h:`from ${step.formula}`});
+  }
+  else if(step.action==='combine_quadrant'){
+    const valStr=step.result.length===1?String(step.result[0][0]):matStr(step.result);
+    // Build formula from tokens — NOT regex on HTML
+    const tokens=step.formula.match(/[A-Z]\d|[+\-]/g)||[];
+    let fHtml='';
+    for(const tok of tokens){
+      if(tok==='+'){ fHtml+=mo('+'); }
+      else if(tok==='-'){ fHtml+=mo('\u2212'); }
+      else {
+        // tok is like P1, P2, M1, M2 etc — or C11
+        const pIdx=parseInt(tok[1])-1;
+        const c=PC[pIdx];
+        const label='P'+tok[1];
+        fHtml+=c?mpc(label,c.hex):mpc(label,'#6c8aff');
+      }
+    }
+    lines.push({cls:'math-line',tag:'op-tag-combine',tl:'COMBINE',
+      h:`${mr(step.quadrant)}${meq()}${fHtml}`});
+    lines.push({cls:'math-line-sm',h:`${meq()}${mr(valStr)}`});
+  }
+  else if(step.action==='join'){
+    const valStr=step.result?matStr(step.result):'';
+    lines.push({cls:'math-line',tag:'op-tag-result',tl:'JOIN',
+      h:`${mv('C')}${meq()}${mp('[')}${mi('C','11')}&ensp;${mi('C','12')}&ensp;${mi('C','21')}&ensp;${mi('C','22')}${mp(']')}`});
+    if(valStr)lines.push({cls:'math-line-sm',h:`${mv('C')}${meq()}${mn(valStr)}`});
+  }
+  else{
+    lines.push({cls:'math-line-xs',tag:'op-tag-init',tl:'INFO',h:step.explain||''});
+  }
+  // Render
+  let html='<div class="viz-op-banner">';
+  for(const ln of lines){
+    let tagH='';
+    if(ln.tag){const tc=ln.tc||'';tagH=`<span class="op-type-tag ${ln.tag}"${tc?` style="background:${tc}22;color:${tc}"`:``}>${ln.tl||''}</span>`}
+    html+=`<div class="${ln.cls}">${tagH}${ln.h}</div>`;
+  }
+  html+='</div>';return html;
 }
 
 function renderNaiveSvg(eng,step){
@@ -1185,52 +1488,91 @@ function renderNaiveSvg(eng,step){
   const viz=document.getElementById('vizN');
   const n=currentSize,A=eng.inputA,B=eng.inputB;
   const C=matZeros(n);
-  // Build progressive C from completed cells
   if(step)for(let i=0;i<=eng.stepIdx;i++){const s=eng.steps[i];if(s.action==='naive_cell_done')C[s.i][s.j]=s.sum}
-  // Determine highlights
   let aHL=[],bHL=[],cHL=[],info='Ready';
   if(step){
     info=step.explain;
     if(step.action==='naive_cell_start'||step.action==='naive_multiply'){
-      // Highlight row of A
       for(let c=0;c<n;c++)aHL.push({r:step.i,c,cls:step.action==='naive_multiply'&&c===step.k?'mult':'read'});
-      // Highlight column of B
       for(let r=0;r<n;r++)bHL.push({r,c:step.j,cls:step.action==='naive_multiply'&&r===step.k?'mult':'read'});
       cHL.push({r:step.i,c:step.j,cls:'write'});
     }
     if(step.action==='naive_cell_done'){cHL.push({r:step.i,c:step.j,cls:'done'})}
   }
-  viz.innerHTML=buildNaiveMatrixSvg(A,B,C,n,aHL,bHL,cHL,info,step);
+  const svgStr=buildNaiveMatrixSvg(A,B,C,n,aHL,bHL,cHL,info,step);
+  const banner=buildNaiveOpBanner(eng,step);
+  viz.innerHTML=svgStr+banner;
 }
 
-// Shared SVG matrix builder for Strassen (with quadrant highlights)
-function buildMatrixSvg(A,B,C,n,showPart,aQ,bQ,cQ,info,formula,isStrassen){
-  const cs=n<=2?50:34,gap=3,matW=n*cs+(n-1)*gap,opW=n<=2?36:28,padX=18,topH=formula?50:36,botH=36;
-  const totalW=padX*2+matW*3+opW*2,totalH=topH+matW+botH;
-  const matY=topH,ax=padX,bx=padX+matW+opW,cx=bx+matW+opW;
-  let svg=`<svg class="viz-svg" viewBox="0 0 ${totalW} ${totalH}" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">`;
-  svg+=`<rect width="${totalW}" height="${totalH}" fill="#1c1f2e"/>`;
-  // Info
-  svg+=`<text x="${totalW/2}" y="16" text-anchor="middle" class="viz-title">${escSvg(info.length>85?info.slice(0,84)+'\u2026':info)}</text>`;
-  if(formula)svg+=`<text x="${totalW/2}" y="32" text-anchor="middle" class="viz-info" font-size="11">${escSvg(formula)}</text>`;
-  // Labels
-  svg+=`<text x="${ax+matW/2}" y="${matY-6}" text-anchor="middle" class="viz-mat-label" fill="#a78bfa">A</text>`;
-  svg+=`<text x="${bx+matW/2}" y="${matY-6}" text-anchor="middle" class="viz-mat-label" fill="#f97316">B</text>`;
-  svg+=`<text x="${cx+matW/2}" y="${matY-6}" text-anchor="middle" class="viz-mat-label" fill="#34d399">C</text>`;
-  // Operators
-  const opY=matY+matW/2+3;
-  svg+=`<text x="${ax+matW+opW/2}" y="${opY}" text-anchor="middle" class="viz-op">\u00d7</text>`;
-  svg+=`<text x="${bx+matW+opW/2}" y="${opY}" text-anchor="middle" class="viz-op">=</text>`;
-  // Draw matrices
-  svg+=drawMatrix(A,ax,matY,n,cs,gap,null,showPart,'A');
-  svg+=drawMatrix(B,bx,matY,n,cs,gap,null,showPart,'B');
-  svg+=drawMatrixC(C,cx,matY,n,cs,gap,showPart);
-  // Quadrant overlays
-  if(aQ)svg+=drawQuadOverlays(ax,matY,n,cs,gap,aQ);
-  if(bQ)svg+=drawQuadOverlays(bx,matY,n,cs,gap,bQ);
-  if(cQ)svg+=drawQuadOverlays(cx,matY,n,cs,gap,cQ);
-  svg+='</svg>';
-  return svg;
+/** Build the operation banner HTML for Naive (math-style) */
+function buildNaiveOpBanner(eng,step){
+  if(!step)return`<div class="viz-op-banner"><div class="math-line-xs" style="color:var(--text-muted);text-align:center;padding:6px 0">Click Build then Step or Play to see the live derivation.</div></div>`;
+  let lines=[];
+  const I=step.i>=0?step.i+1:0,J=step.j>=0?step.j+1:0,K=step.k>=0?step.k+1:0;
+
+  if(step.action==='naive_start'){
+    lines.push({cls:'math-line',tag:'op-tag-init',tl:'BEGIN',
+      h:`${mv('C')}${meq()}${mv('A')}${mo('\u00d7')}${mv('B')}&emsp;${mp('(')}${mn(step.n)}\u00d7${mn(step.n)}${mp(')')}`});
+  }
+  else if(step.action==='naive_init'){
+    lines.push({cls:'math-line',tag:'op-tag-init',tl:'INIT',
+      h:`${mv('C')}${meq()}${mn('0')}&ensp;for all entries`});
+  }
+  else if(step.action==='naive_cell_start'){
+    const A=eng.inputA,B=eng.inputB,n=currentSize;
+    // Line 1: Which cell, as dot product
+    lines.push({cls:'math-line',tag:'op-tag-init',tl:`C<sub>${I}${J}</sub>`,
+      h:`${mv('C')}${mp('[')}${mn(I)}${mp('][')}${mn(J)}${mp(']')}${meq()}`
+       +`row ${mn(I)} of ${mv('A')}${mo('\u00b7')}column ${mn(J)} of ${mv('B')}`});
+    // Line 2: Show the vectors
+    const rowV=A[step.i].map(v=>mn(v)).join(`${mp(',')}&thinsp;`);
+    const colV=Array.from({length:n},(_,r)=>mn(B[r][step.j])).join(`${mp(',')}&thinsp;`);
+    lines.push({cls:'math-line-sm',
+      h:`${meq()}${mp('(')}${rowV}${mp(')')}${mo('\u00b7')}${mp('(')}${colV}${mp(')')}`});
+  }
+  else if(step.action==='naive_multiply'){
+    const prevSum=step.sum-step.prod;
+    // Line 1: Symbolic — A[i][k] × B[k][j]
+    lines.push({cls:'math-line',tag:'op-tag-mult',tl:'\u00d7',
+      h:`${mv('A')}${mp('[')}${mn(I)}${mp('][')}${mn(K)}${mp(']')}`
+       +`${mo('\u00d7')}`
+       +`${mv('B')}${mp('[')}${mn(K)}${mp('][')}${mn(J)}${mp(']')}`
+       +`${meq()}`
+       +`${mn(step.aVal)}${mo('\u00d7')}${mn(step.bVal)}${meq()}${mr(step.prod)}`});
+    // Line 2: Running sum
+    if(step.k>0){
+      lines.push({cls:'math-line-sm',
+        h:`sum${meq()}${mn(prevSum)}${mo('+')}${mn(step.prod)}${meq()}${mr(step.sum)}`});
+    } else {
+      lines.push({cls:'math-line-sm',h:`sum${meq()}${mr(step.prod)}`});
+    }
+    // Line 3: progress context
+    lines.push({cls:'math-line-xs',h:`term ${mn(K)} of ${mn(currentSize)} for ${mv('C')}${mp('[')}${mn(I)}${mp('][')}${mn(J)}${mp(']')}`});
+  }
+  else if(step.action==='naive_cell_done'){
+    const A=eng.inputA,B=eng.inputB,n=currentSize;
+    // Line 1: Result
+    lines.push({cls:'math-line',tag:'op-tag-result',tl:'\u2713',
+      h:`${mv('C')}${mp('[')}${mn(I)}${mp('][')}${mn(J)}${mp(']')}${meq()}${mr(step.sum)}`});
+    // Line 2: Full dot product expansion
+    const terms=Array.from({length:n},(_,k)=>`${mn(A[step.i][k])}${mo('\u00d7')}${mn(B[k][step.j])}`).join(mo('+'));
+    lines.push({cls:'math-line-sm',h:`${meq()}${terms}${meq()}${mr(step.sum)}`});
+  }
+  else if(step.action==='naive_complete'){
+    const valStr=step.result?matStr(step.result):'';
+    lines.push({cls:'math-line',tag:'op-tag-result',tl:'DONE',h:`Multiplication complete`});
+    if(valStr)lines.push({cls:'math-line-sm',h:`${mv('C')}${meq()}${mn(valStr)}`});
+  }
+  else{
+    lines.push({cls:'math-line-xs',tag:'op-tag-init',tl:'INFO',h:step.explain||''});
+  }
+  let html='<div class="viz-op-banner">';
+  for(const ln of lines){
+    let tagH='';
+    if(ln.tag){const tc=ln.tc||'';tagH=`<span class="op-type-tag ${ln.tag}"${tc?` style="background:${tc}22;color:${tc}"`:``}>${ln.tl||''}</span>`}
+    html+=`<div class="${ln.cls}">${tagH}${ln.h}</div>`;
+  }
+  html+='</div>';return html;
 }
 
 function drawMatrix(M,mx,my,n,cs,gap,cellHL,showPart,prefix){
@@ -1238,7 +1580,7 @@ function drawMatrix(M,mx,my,n,cs,gap,cellHL,showPart,prefix){
   for(let r=0;r<n;r++)for(let c=0;c<n;c++){
     const x=mx+c*(cs+gap),y=my+r*(cs+gap);
     s+=`<rect x="${x}" y="${y}" width="${cs}" height="${cs}" rx="3" fill="#232738" stroke="#2a2e3f" stroke-width="1"/>`;
-    s+=`<text x="${x+cs/2}" y="${y+cs/2+1}" text-anchor="middle" dominant-baseline="middle" class="viz-cell-text" font-size="${n<=2?13:10}">${M[r][c]}</text>`;
+    s+=`<text x="${x+cs/2}" y="${y+cs/2+1}" text-anchor="middle" dominant-baseline="middle" class="viz-cell-text" font-size="${n<=2?10:n<=4?7.5:n<=8?5.5:3.8}">${M[r][c]}</text>`;
   }
   if(showPart&&n>1){
     const px=mx+h*(cs+gap)-gap/2,py=my+h*(cs+gap)-gap/2;
@@ -1257,8 +1599,8 @@ function drawMatrixC(C,mx,my,n,cs,gap,showPart){
     let filled=false;for(let rr=0;rr<n;rr++)for(let cc=0;cc<n;cc++)if(C[rr][cc]!==0)filled=true;
     const isSet=C[r][c]!==0;
     s+=`<rect x="${x}" y="${y}" width="${cs}" height="${cs}" rx="3" fill="#232738" stroke="#2a2e3f" stroke-width="1"/>`;
-    if(isSet)s+=`<text x="${x+cs/2}" y="${y+cs/2+1}" text-anchor="middle" dominant-baseline="middle" class="viz-cell-text viz-cell-result" font-size="${n<=2?13:10}">${v}</text>`;
-    else s+=`<text x="${x+cs/2}" y="${y+cs/2+1}" text-anchor="middle" dominant-baseline="middle" class="viz-cell-text viz-cell-empty" font-size="${n<=2?13:10}">?</text>`;
+    if(isSet)s+=`<text x="${x+cs/2}" y="${y+cs/2+1}" text-anchor="middle" dominant-baseline="middle" class="viz-cell-text viz-cell-result" font-size="${n<=2?10:n<=4?7.5:n<=8?5.5:3.8}">${v}</text>`;
+    else s+=`<text x="${x+cs/2}" y="${y+cs/2+1}" text-anchor="middle" dominant-baseline="middle" class="viz-cell-text viz-cell-empty" font-size="${n<=2?10:n<=4?7.5:n<=8?5.5:3.8}">?</text>`;
   }
   if(showPart&&n>1){
     const px=mx+h*(cs+gap)-gap/2,py=my+h*(cs+gap)-gap/2;
@@ -1271,26 +1613,30 @@ function drawMatrixC(C,mx,my,n,cs,gap,showPart){
   }
   return s;
 }
-function drawQuadOverlays(mx,my,n,cs,gap,quads){
-  let s='';const h=n/2;
-  for(const q of quads){const qp=QP[q.name];if(!qp)continue;
-    const qx=mx+qp.qc*h*(cs+gap),qy=my+qp.qr*h*(cs+gap),qw=h*cs+(h-1)*gap;
-    s+=`<rect x="${qx-2}" y="${qy-2}" width="${qw+4}" height="${qw+4}" rx="5" fill="${q.fill}" stroke="${q.stroke}" stroke-width="2" style="animation:vizFadeIn .25s ease"/>`;
-  }
-  return s;
-}
 
 // SVG for Naive (row/column highlighting)
 function buildNaiveMatrixSvg(A,B,C,n,aHL,bHL,cHL,info,step){
-  const cs=n<=2?50:34,gap=3,matW=n*cs+(n-1)*gap,opW=n<=2?36:28,padX=18,topH=36,botH=36;
-  const totalW=padX*2+matW*3+opW*2,totalH=topH+matW+botH;
+  // ── Same zone-based layout as Strassen ──
+  const cs=n<=2?32:n<=4?22:n<=8?14:8;
+  const gap=n<=8?2:1;
+  const matW=n*cs+(n-1)*gap;
+  const opW=n<=2?24:n<=4?20:n<=8?14:10,padX=n<=8?14:10;
+  const infoH=12,gapAfterInfo=6,labelH=10,gapAfterLabel=4,botH=8;
+  const topH=infoH+gapAfterInfo+labelH+gapAfterLabel;
+  const contentW=padX*2+matW*3+opW*2,contentH=topH+matW+botH;
+  const vbPadX=Math.round(contentW*0.25),vbPadY=Math.round(contentH*0.22);
+  const vbW=contentW+vbPadX*2,vbH=contentH+vbPadY*2;
+  const ox=vbPadX,oy=vbPadY;
+  const totalW=contentW,totalH=contentH;
   const matY=topH,ax=padX,bx=padX+matW+opW,cx=bx+matW+opW;
-  let svg=`<svg class="viz-svg" viewBox="0 0 ${totalW} ${totalH}" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">`;
-  svg+=`<rect width="${totalW}" height="${totalH}" fill="#1c1f2e"/>`;
-  svg+=`<text x="${totalW/2}" y="16" text-anchor="middle" class="viz-title">${escSvg(info.length>85?info.slice(0,84)+'\u2026':info)}</text>`;
-  svg+=`<text x="${ax+matW/2}" y="${matY-6}" text-anchor="middle" class="viz-mat-label" fill="#a78bfa">A</text>`;
-  svg+=`<text x="${bx+matW/2}" y="${matY-6}" text-anchor="middle" class="viz-mat-label" fill="#f97316">B</text>`;
-  svg+=`<text x="${cx+matW/2}" y="${matY-6}" text-anchor="middle" class="viz-mat-label" fill="#34d399">C</text>`;
+  const infoY=infoH,labelY=infoH+gapAfterInfo+labelH-2;
+  let svg=`<svg class="viz-svg" viewBox="0 0 ${vbW} ${vbH}" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">`;
+  svg+=`<rect width="${vbW}" height="${vbH}" fill="#1c1f2e"/>`;
+  svg+=`<g transform="translate(${ox},${oy})">`;
+  svg+=`<text x="${totalW/2}" y="${infoY}" text-anchor="middle" class="viz-title">${escSvg(info.length>70?info.slice(0,69)+'\u2026':info)}</text>`;
+  svg+=`<text x="${ax+matW/2}" y="${labelY}" text-anchor="middle" class="viz-mat-label" fill="#a78bfa">A</text>`;
+  svg+=`<text x="${bx+matW/2}" y="${labelY}" text-anchor="middle" class="viz-mat-label" fill="#f97316">B</text>`;
+  svg+=`<text x="${cx+matW/2}" y="${labelY}" text-anchor="middle" class="viz-mat-label" fill="#34d399">C</text>`;
   const opY=matY+matW/2+3;
   svg+=`<text x="${ax+matW+opW/2}" y="${opY}" text-anchor="middle" class="viz-op">\u00d7</text>`;
   svg+=`<text x="${bx+matW+opW/2}" y="${opY}" text-anchor="middle" class="viz-op">=</text>`;
@@ -1301,7 +1647,7 @@ function buildNaiveMatrixSvg(A,B,C,n,aHL,bHL,cHL,info,step){
     const fill=hl?(hl.cls==='mult'?'rgba(251,191,36,0.2)':'rgba(108,138,255,0.12)'):'#232738';
     const stroke=hl?(hl.cls==='mult'?'#fbbf24':'#6c8aff'):'#2a2e3f';
     svg+=`<rect x="${x}" y="${y}" width="${cs}" height="${cs}" rx="3" fill="${fill}" stroke="${stroke}" stroke-width="${hl?2:1}"/>`;
-    svg+=`<text x="${x+cs/2}" y="${y+cs/2+1}" text-anchor="middle" dominant-baseline="middle" class="viz-cell-text" font-size="${n<=2?13:10}">${A[r][c]}</text>`;
+    svg+=`<text x="${x+cs/2}" y="${y+cs/2+1}" text-anchor="middle" dominant-baseline="middle" class="viz-cell-text" font-size="${n<=2?10:n<=4?7.5:n<=8?5.5:3.8}">${A[r][c]}</text>`;
   }
   // Draw B with highlights
   for(let r=0;r<n;r++)for(let c=0;c<n;c++){
@@ -1310,7 +1656,7 @@ function buildNaiveMatrixSvg(A,B,C,n,aHL,bHL,cHL,info,step){
     const fill=hl?(hl.cls==='mult'?'rgba(251,191,36,0.2)':'rgba(249,115,22,0.12)'):'#232738';
     const stroke=hl?(hl.cls==='mult'?'#fbbf24':'#f97316'):'#2a2e3f';
     svg+=`<rect x="${x}" y="${y}" width="${cs}" height="${cs}" rx="3" fill="${fill}" stroke="${stroke}" stroke-width="${hl?2:1}"/>`;
-    svg+=`<text x="${x+cs/2}" y="${y+cs/2+1}" text-anchor="middle" dominant-baseline="middle" class="viz-cell-text" font-size="${n<=2?13:10}">${B[r][c]}</text>`;
+    svg+=`<text x="${x+cs/2}" y="${y+cs/2+1}" text-anchor="middle" dominant-baseline="middle" class="viz-cell-text" font-size="${n<=2?10:n<=4?7.5:n<=8?5.5:3.8}">${B[r][c]}</text>`;
   }
   // Draw C
   for(let r=0;r<n;r++)for(let c=0;c<n;c++){
@@ -1320,15 +1666,17 @@ function buildNaiveMatrixSvg(A,B,C,n,aHL,bHL,cHL,info,step){
     const fill=hl?(hl.cls==='write'?'rgba(52,211,153,0.14)':hl.cls==='done'?'rgba(52,211,153,0.2)':'#232738'):'#232738';
     const stroke=hl?'#34d399':'#2a2e3f';
     svg+=`<rect x="${x}" y="${y}" width="${cs}" height="${cs}" rx="3" fill="${fill}" stroke="${stroke}" stroke-width="${hl?2:1}"/>`;
-    const val=C[r][c]!==0?C[r][c]:(hl&&step&&step.sum!==undefined&&hl.r===step.i&&hl.c===step.j?step.sum:null);
-    if(val!==null)svg+=`<text x="${x+cs/2}" y="${y+cs/2+1}" text-anchor="middle" dominant-baseline="middle" class="viz-cell-text viz-cell-result" font-size="${n<=2?13:10}">${val}</text>`;
-    else svg+=`<text x="${x+cs/2}" y="${y+cs/2+1}" text-anchor="middle" dominant-baseline="middle" class="viz-cell-text viz-cell-empty" font-size="${n<=2?13:10}">?</text>`;
+    // Only show finalized values (from C array, populated by naive_cell_done).
+    // During active computation (write highlight), show a dot indicator instead of the partial sum.
+    const finalized=C[r][c]!==0;
+    const isActive=hl&&hl.cls==='write';
+    const fs=n<=2?10:n<=4?7.5:n<=8?5.5:3.8;
+    if(finalized)svg+=`<text x="${x+cs/2}" y="${y+cs/2+1}" text-anchor="middle" dominant-baseline="middle" class="viz-cell-text viz-cell-result" font-size="${fs}">${C[r][c]}</text>`;
+    else if(hl&&hl.cls==='done')svg+=`<text x="${x+cs/2}" y="${y+cs/2+1}" text-anchor="middle" dominant-baseline="middle" class="viz-cell-text viz-cell-result" font-size="${fs}">${step.sum}</text>`;
+    else if(isActive)svg+=`<text x="${x+cs/2}" y="${y+cs/2+1}" text-anchor="middle" dominant-baseline="middle" font-size="${fs*0.7}" fill="#fbbf24">\u2026</text>`;
+    else svg+=`<text x="${x+cs/2}" y="${y+cs/2+1}" text-anchor="middle" dominant-baseline="middle" class="viz-cell-text viz-cell-empty" font-size="${fs}">?</text>`;
   }
-  // Bottom info
-  if(step&&step.action==='naive_multiply'){
-    svg+=`<text x="${totalW/2}" y="${totalH-10}" text-anchor="middle" class="viz-info" font-size="10.5">i=${step.i+1} j=${step.j+1} k=${step.k+1}: ${step.aVal}\u00d7${step.bVal}=${step.prod}, sum=${step.sum}</text>`;
-  }
-  svg+='</svg>';
+  svg+='</g></svg>';
   return svg;
 }
 
@@ -1477,16 +1825,21 @@ function pathTo(root,tid){const p=[];function s(n){p.push(n);if(n.id===tid)retur
 function renderRecursionTree(eng,activeId){
   const c=document.getElementById('dcTreeContainer');
   if(!eng.tree){c.innerHTML='<div style="text-align:center;color:var(--text-muted);padding:24px 0;font-size:.86rem;">Click <strong>Build</strong> to see the recursion tree.</div>';return}
-  // Layout
-  const nW=50,nH=26,hG=6,vG=36;let nx=0;
+  // Layout — compact node sizes with breathing room via inflated viewBox
+  const nW=34,nH=18,hG=3,vG=22;let nx=0;
   function ax(nd){if(nd.children.length===0){nd._x=nx;nx+=nW+hG;return}for(const c of nd.children)ax(c);nd._x=(nd.children[0]._x+nd.children[nd.children.length-1]._x)/2}
   ax(eng.tree);
-  const W=nx-hG+16,nodes=[],edges=[];let maxD=0;
+  const W=nx-hG+12,nodes=[],edges=[];let maxD=0;
   function collect(nd){const x=nd._x+nW/2,y=nd.depth*(nH+vG)+nH/2;if(nd.depth>maxD)maxD=nd.depth;nodes.push({nd,x,y});
     for(const ch of nd.children){const cx2=ch._x+nW/2,cy=ch.depth*(nH+vG)+nH/2;edges.push({x1:x,y1:y+nH/2,x2:cx2,y2:cy-nH/2});collect(ch)}}
   collect(eng.tree);
-  const H=(maxD+1)*(nH+vG)+8,pad=6;
-  let svg=`<svg class="dc-tree-svg" viewBox="0 0 ${W+pad*2} ${H+pad}" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;min-height:100px;display:block;">`;
+  const H=(maxD+1)*(nH+vG)+6,pad=4;
+  // Inflate viewBox for breathing room
+  const treeContentW=W+pad*2,treeContentH=H+pad;
+  const treePadX=Math.round(treeContentW*0.15),treePadY=Math.round(treeContentH*0.15);
+  const treeVbW=treeContentW+treePadX*2,treeVbH=treeContentH+treePadY*2;
+  let svg=`<svg class="dc-tree-svg" viewBox="0 0 ${treeVbW} ${treeVbH}" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;min-height:80px;display:block;">`;
+  svg+=`<g transform="translate(${treePadX},${treePadY})">`;
   for(const e of edges)svg+=`<line x1="${e.x1+pad}" y1="${e.y1+pad}" x2="${e.x2+pad}" y2="${e.y2+pad}" stroke="#2a2e3f" stroke-width="1.5"/>`;
   const path=activeId!=null?pathTo(eng.tree,activeId):[];
   for(const nd of nodes){const n=nd.nd,isA=n.id===activeId,isP=path.some(p=>p.id===n.id),isDone=eng.stepIdx>=0&&n.exitIdx>=0&&n.exitIdx<=eng.stepIdx&&!isA;
@@ -1497,9 +1850,9 @@ function renderRecursionTree(eng,activeId){
     const rx=nd.x-nW/2+pad,ry=nd.y-nH/2+pad;
     svg+=`<rect x="${rx}" y="${ry}" width="${nW}" height="${nH}" rx="5" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`;
     const lbl=n.pc?n.pc.label:n.label;
-    svg+=`<text x="${nd.x+pad}" y="${nd.y+pad+1}" text-anchor="middle" dominant-baseline="middle" font-size="${n.depth===0?8.5:7.5}" font-weight="700" fill="${tf}">${lbl}</text>`;
+    svg+=`<text x="${nd.x+pad}" y="${nd.y+pad+1}" text-anchor="middle" dominant-baseline="middle" font-size="${n.depth===0?6.5:5.5}" font-weight="700" fill="${tf}">${lbl}</text>`;
   }
-  svg+='</svg>';c.innerHTML=svg;
+  svg+='</g></svg>';c.innerHTML=svg;
 }
 function renderCallStack(eng,activeId){
   const panel=document.getElementById('dcCallStack');
@@ -1517,7 +1870,18 @@ function renderCallStack(eng,activeId){
 // ═══════════════════════════════════════════════════════════════════════
 function buildGrid(id,dimId,n,vals){
   const grid=document.getElementById(id);
+  // Wrap large grids in a scrollable container
+  const wrap=grid.parentElement;
+  let scrollWrap=wrap.querySelector('.matrix-grid-scroll');
+  if(n>=8){
+    if(!scrollWrap){scrollWrap=document.createElement('div');scrollWrap.className='matrix-grid-scroll';wrap.insertBefore(scrollWrap,grid);scrollWrap.appendChild(grid)}
+  } else {
+    if(scrollWrap){scrollWrap.parentElement.insertBefore(grid,scrollWrap);scrollWrap.remove()}
+  }
   grid.innerHTML='';grid.style.gridTemplateColumns=`repeat(${n},1fr)`;
+  grid.classList.remove('grid-lg','grid-xl');
+  if(n===8)grid.classList.add('grid-lg');
+  if(n>=16)grid.classList.add('grid-xl');
   document.getElementById(dimId).textContent=`${n} x ${n}`;
   for(let r=0;r<n;r++)for(let c=0;c<n;c++){
     const inp=document.createElement('input');inp.type='number';inp.min='-999';inp.max='999';inp.value=vals[r][c];
