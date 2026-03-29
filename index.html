@@ -1198,10 +1198,16 @@ function renderStep(eng){
   if(eng.stepIdx<0||eng.stepIdx>=eng.steps.length)return;
   const step=eng.steps[eng.stepIdx];
   const suf=eng.type==='strassen'?'S':'N';
-  // Pseudocode highlight
-  const lines=document.getElementById('pseudocode'+suf).querySelectorAll('.line');
-  lines.forEach(l=>l.classList.remove('active'));
-  if(step.pcl!=null){const t=lines[step.pcl-1];if(t){t.classList.add('active');t.scrollIntoView({block:'nearest',behavior:'smooth'})}}
+  // Pseudocode highlight — scroll only inside the pseudocode container, never the page
+  const pcContainer=document.getElementById('pseudocode'+suf);
+  const pcLines=pcContainer.querySelectorAll('.line');
+  pcLines.forEach(l=>l.classList.remove('active'));
+  if(step.pcl!=null){const t=pcLines[step.pcl-1];if(t){t.classList.add('active');
+    // Manual scroll within the container only
+    const ct=t.offsetTop,ch=t.offsetHeight,st=pcContainer.scrollTop,vh=pcContainer.clientHeight;
+    if(ct<st+10)pcContainer.scrollTop=Math.max(0,ct-10);
+    else if(ct+ch>st+vh-10)pcContainer.scrollTop=ct+ch-vh+10;
+  }}
   // Step explanation
   document.getElementById('stepExplain'+suf).innerHTML=`<div class="step-number">${eng.stepIdx+1}</div><div class="step-content"><h3>${stepTitle(eng,step)}</h3><p class="step-explain">${step.explain}</p>${stepFormula(eng,step)}</div>`;
   // Step log highlight
@@ -1892,7 +1898,7 @@ function buildGrid(id,dimId,n,vals){
       if(e.key==='ArrowLeft'&&idx>0)next=grid.children[idx-1];
       if(e.key==='ArrowDown'&&idx+n<grid.children.length)next=grid.children[idx+n];
       if(e.key==='ArrowUp'&&idx-n>=0)next=grid.children[idx-n];
-      if(next){e.preventDefault();next.focus()}});
+      if(next){e.preventDefault();next.focus({preventScroll:true})}});
     grid.appendChild(inp);
   }
 }
