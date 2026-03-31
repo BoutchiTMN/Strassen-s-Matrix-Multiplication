@@ -78,7 +78,9 @@ Open the file:
 
 index.html
 
-Or use the GitHub Pages link.
+Or use the GitHub Pages link:
+
+    https://boutchitmn.github.io/Strassen-s-Matrix-Multiplication/
 
 No installation required.
 
