@@ -1,15 +1,4 @@
-## Course Information
 
-Course: BCS 309 – Algorithms I  
-Instructor: Dr. Ahmed Hussein  
-University: Canadian University Dubai  
-
-Semester: Spring 2026  
-
-Student: Bouchina, Othmane 
-ID: 20220001467
-
----
 
 # Strassen vs Naive Matrix Multiplication Visualizer
 
@@ -103,3 +92,18 @@ This project is designed for learning purposes to demonstrate:
 - divide and conquer strategy
 - recursive computation
 - differences between algorithm approaches
+
+---
+
+## Course Information
+
+Course: BCS 309 – Algorithms I  
+Instructor: Dr. Ahmed Hussein  
+University: Canadian University Dubai  
+
+Semester: Spring 2026  
+
+Student: Bouchina, Othmane 
+ID: 20220001467
+
+
