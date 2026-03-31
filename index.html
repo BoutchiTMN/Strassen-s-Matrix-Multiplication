@@ -544,22 +544,22 @@ tbody tr:hover{background:rgba(108,138,255,.04)}
             <div class="line" data-line="1" data-tip="Entry point: recursively multiply two n×n matrices"><span class="line-num">1</span><span class="line-code"><span class="kw">function</span> <span class="fn">strassen</span>(A, B, n):</span></div>
             <div class="line" data-line="2" data-tip="Base case: if 1×1, just multiply scalars"><span class="line-num">2</span><span class="line-code">  <span class="kw">if</span> n <span class="op">==</span> 1: <span class="kw">return</span> A[0][0]<span class="op">*</span>B[0][0]</span></div>
             <div class="line" data-line="3" data-tip="Split each matrix into 4 quadrants"><span class="line-num">3</span><span class="line-code">  <span class="cm">// Split into quadrants</span></span></div>
-            <div class="line" data-line="4" data-tip="Partition A into A11,A12,A21,A22"><span class="line-num">4</span><span class="line-code">  A11,A12,A21,A22 <span class="op">=</span> split(A)</span></div>
-            <div class="line" data-line="5" data-tip="Partition B similarly"><span class="line-num">5</span><span class="line-code">  B11,B12,B21,B22 <span class="op">=</span> split(B)</span></div>
+            <div class="line" data-line="4" data-tip="Split A into quadrants a, b, c, d"><span class="line-num">4</span><span class="line-code">  a,b,c,d <span class="op">=</span> split(A)</span></div>
+            <div class="line" data-line="5" data-tip="Split B into quadrants e, f, g, h"><span class="line-num">5</span><span class="line-code">  e,f,g,h <span class="op">=</span> split(B)</span></div>
             <div class="line" data-line="6" data-tip="Compute 7 products instead of 8"><span class="line-num">6</span><span class="line-code">  <span class="cm">// 7 recursive products</span></span></div>
-            <div class="line" data-line="7" data-tip="P1: diagonal blocks of A × diagonal blocks of B"><span class="line-num">7</span><span class="line-code">  P1<span class="op">=</span><span class="fn">strassen</span>(A11<span class="op">+</span>A22,B11<span class="op">+</span>B22)</span></div>
-            <div class="line" data-line="8" data-tip="P2: bottom row of A × B's top-left"><span class="line-num">8</span><span class="line-code">  P2<span class="op">=</span><span class="fn">strassen</span>(A21<span class="op">+</span>A22,B11)</span></div>
-            <div class="line" data-line="9" data-tip="P3: A's top-left × difference of B's right column"><span class="line-num">9</span><span class="line-code">  P3<span class="op">=</span><span class="fn">strassen</span>(A11,B12<span class="op">−</span>B22)</span></div>
-            <div class="line" data-line="10" data-tip="P4: A's bottom-right × difference of B's left column"><span class="line-num">10</span><span class="line-code">  P4<span class="op">=</span><span class="fn">strassen</span>(A22,B21<span class="op">−</span>B11)</span></div>
-            <div class="line" data-line="11" data-tip="P5: top row of A × B's bottom-right"><span class="line-num">11</span><span class="line-code">  P5<span class="op">=</span><span class="fn">strassen</span>(A11<span class="op">+</span>A12,B22)</span></div>
-            <div class="line" data-line="12" data-tip="P6: (A21−A11)×(B11+B12)"><span class="line-num">12</span><span class="line-code">  P6<span class="op">=</span><span class="fn">strassen</span>(A21<span class="op">−</span>A11,B11<span class="op">+</span>B12)</span></div>
-            <div class="line" data-line="13" data-tip="P7: (A12−A22)×(B21+B22)"><span class="line-num">13</span><span class="line-code">  P7<span class="op">=</span><span class="fn">strassen</span>(A12<span class="op">−</span>A22,B21<span class="op">+</span>B22)</span></div>
+            <div class="line" data-line="7" data-tip="P1: diagonal blocks (a+d)×(e+h)"><span class="line-num">7</span><span class="line-code">  P1<span class="op">=</span><span class="fn">strassen</span>(a<span class="op">+</span>d, e<span class="op">+</span>h)</span></div>
+            <div class="line" data-line="8" data-tip="P2: (c+d)×e"><span class="line-num">8</span><span class="line-code">  P2<span class="op">=</span><span class="fn">strassen</span>(c<span class="op">+</span>d, e)</span></div>
+            <div class="line" data-line="9" data-tip="P3: a×(f−h)"><span class="line-num">9</span><span class="line-code">  P3<span class="op">=</span><span class="fn">strassen</span>(a, f<span class="op">−</span>h)</span></div>
+            <div class="line" data-line="10" data-tip="P4: d×(g−e)"><span class="line-num">10</span><span class="line-code">  P4<span class="op">=</span><span class="fn">strassen</span>(d, g<span class="op">−</span>e)</span></div>
+            <div class="line" data-line="11" data-tip="P5: (a+b)×h"><span class="line-num">11</span><span class="line-code">  P5<span class="op">=</span><span class="fn">strassen</span>(a<span class="op">+</span>b, h)</span></div>
+            <div class="line" data-line="12" data-tip="P6: (c−a)×(e+f)"><span class="line-num">12</span><span class="line-code">  P6<span class="op">=</span><span class="fn">strassen</span>(c<span class="op">−</span>a, e<span class="op">+</span>f)</span></div>
+            <div class="line" data-line="13" data-tip="P7: (b−d)×(g+h)"><span class="line-num">13</span><span class="line-code">  P7<span class="op">=</span><span class="fn">strassen</span>(b<span class="op">−</span>d, g<span class="op">+</span>h)</span></div>
             <div class="line" data-line="14" data-tip="Assemble result from 7 products"><span class="line-num">14</span><span class="line-code">  <span class="cm">// Combine results</span></span></div>
             <div class="line" data-line="15" data-tip="C11 = P1+P4−P5+P7"><span class="line-num">15</span><span class="line-code">  C11<span class="op">=</span>P1<span class="op">+</span>P4<span class="op">−</span>P5<span class="op">+</span>P7</span></div>
             <div class="line" data-line="16" data-tip="C12 = P3+P5"><span class="line-num">16</span><span class="line-code">  C12<span class="op">=</span>P3<span class="op">+</span>P5</span></div>
             <div class="line" data-line="17" data-tip="C21 = P2+P4"><span class="line-num">17</span><span class="line-code">  C21<span class="op">=</span>P2<span class="op">+</span>P4</span></div>
             <div class="line" data-line="18" data-tip="C22 = P1−P2+P3+P6"><span class="line-num">18</span><span class="line-code">  C22<span class="op">=</span>P1<span class="op">−</span>P2<span class="op">+</span>P3<span class="op">+</span>P6</span></div>
-            <div class="line" data-line="19" data-tip="Join quadrants into final result"><span class="line-num">19</span><span class="line-code">  <span class="kw">return</span> combine(C11,C12,C21,C22)</span></div>
+            <div class="line" data-line="19" data-tip="Join quadrants into final result"><span class="line-num">19</span><span class="line-code">  <span class="kw">return</span> combine(C11, C12, C21, C22)</span></div>
           </div>
         </div>
       </div>
@@ -607,8 +607,8 @@ tbody tr:hover{background:rgba(108,138,255,.04)}
             <ul style="margin:6px 0 6px 18px;font-size:.9rem;color:var(--text-secondary);line-height:1.75">
               <li><strong>Divide:</strong> Split each n&times;n matrix into 4 quadrants of size (n/2)&times;(n/2):
                 <div class="formula-box" style="text-align:left;margin:6px 0;padding:8px 14px;font-size:.88rem;line-height:1.75">
-                  A = [A11 &nbsp;A12]&nbsp;&nbsp;&nbsp;&nbsp; B = [B11 &nbsp;B12]<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;[A21 &nbsp;A22]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[B21 &nbsp;B22]
+                  A = [a &nbsp;b]&nbsp;&nbsp;&nbsp;&nbsp; B = [e &nbsp;f]<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;[c &nbsp;d]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[g &nbsp;h]
                 </div>
               </li>
               <li><strong>Conquer:</strong> Compute <strong>7 intermediate products</strong> (P1&ndash;P7) by cleverly combining quadrants, then recursively multiply each pair.</li>
@@ -621,13 +621,13 @@ tbody tr:hover{background:rgba(108,138,255,.04)}
             <h4><span class="edu-num">3</span> The 7 Strassen Products (P1&ndash;P7)</h4>
             <p>Each product mixes quadrants from A and B so their results can later be combined into all four quadrants of C:</p>
             <div class="formula-box" style="text-align:left;font-size:.88rem;line-height:2;padding:10px 14px;margin:6px 0">
-              <span style="color:#6c8aff;font-weight:700">P1</span> = (A11 + A22) &middot; (B11 + B22)<br>
-              <span style="color:#34d399;font-weight:700">P2</span> = (A21 + A22) &middot; B11<br>
-              <span style="color:#fbbf24;font-weight:700">P3</span> = A11 &middot; (B12 &minus; B22)<br>
-              <span style="color:#f97316;font-weight:700">P4</span> = A22 &middot; (B21 &minus; B11)<br>
-              <span style="color:#a78bfa;font-weight:700">P5</span> = (A11 + A12) &middot; B22<br>
-              <span style="color:#f87171;font-weight:700">P6</span> = (A21 &minus; A11) &middot; (B11 + B12)<br>
-              <span style="color:#22d3ee;font-weight:700">P7</span> = (A12 &minus; A22) &middot; (B21 + B22)
+              <span style="color:#6c8aff;font-weight:700">P1</span> = (a + d) &middot; (e + h)<br>
+              <span style="color:#34d399;font-weight:700">P2</span> = (c + d) &middot; e<br>
+              <span style="color:#fbbf24;font-weight:700">P3</span> = a &middot; (f &minus; h)<br>
+              <span style="color:#f97316;font-weight:700">P4</span> = d &middot; (g &minus; e)<br>
+              <span style="color:#a78bfa;font-weight:700">P5</span> = (a + b) &middot; h<br>
+              <span style="color:#f87171;font-weight:700">P6</span> = (c &minus; a) &middot; (e + f)<br>
+              <span style="color:#22d3ee;font-weight:700">P7</span> = (b &minus; d) &middot; (g + h)
             </div>
             <p>The result quadrants are then assembled using <strong>only additions and subtractions</strong>:</p>
             <div class="formula-box" style="text-align:left;font-size:.88rem;line-height:1.85;padding:10px 14px;margin:6px 0">
@@ -800,14 +800,14 @@ tbody tr:hover{background:rgba(108,138,255,.04)}
             <div class="line" data-line="1" data-tip="Entry: recursively multiply two n×n matrices using 8 sub-products"><span class="line-num">1</span><span class="line-code"><span class="kw">function</span> <span class="fn">rec_naive</span>(A, B, n):</span></div>
             <div class="line" data-line="2" data-tip="Base case: if 1×1, multiply scalars"><span class="line-num">2</span><span class="line-code">  <span class="kw">if</span> n <span class="op">==</span> 1: <span class="kw">return</span> A[0][0]<span class="op">*</span>B[0][0]</span></div>
             <div class="line" data-line="3" data-tip="Split into 4 quadrants"><span class="line-num">3</span><span class="line-code">  <span class="cm">// Split into quadrants</span></span></div>
-            <div class="line" data-line="4" data-tip="Partition A into A11,A12,A21,A22"><span class="line-num">4</span><span class="line-code">  A11,A12,A21,A22 <span class="op">=</span> split(A)</span></div>
-            <div class="line" data-line="5" data-tip="Partition B into B11,B12,B21,B22"><span class="line-num">5</span><span class="line-code">  B11,B12,B21,B22 <span class="op">=</span> split(B)</span></div>
+            <div class="line" data-line="4" data-tip="Split A into quadrants a, b, c, d"><span class="line-num">4</span><span class="line-code">  a,b,c,d <span class="op">=</span> split(A)</span></div>
+            <div class="line" data-line="5" data-tip="Split B into quadrants e, f, g, h"><span class="line-num">5</span><span class="line-code">  e,f,g,h <span class="op">=</span> split(B)</span></div>
             <div class="line" data-line="6" data-tip="8 recursive multiplications — standard block formula"><span class="line-num">6</span><span class="line-code">  <span class="cm">// 8 recursive multiplications</span></span></div>
-            <div class="line" data-line="7" data-tip="C11 = A11×B11 + A12×B21"><span class="line-num">7</span><span class="line-code">  C11<span class="op">=</span><span class="fn">rec_naive</span>(A11,B11)<span class="op">+</span><span class="fn">rec_naive</span>(A12,B21)</span></div>
-            <div class="line" data-line="8" data-tip="C12 = A11×B12 + A12×B22"><span class="line-num">8</span><span class="line-code">  C12<span class="op">=</span><span class="fn">rec_naive</span>(A11,B12)<span class="op">+</span><span class="fn">rec_naive</span>(A12,B22)</span></div>
-            <div class="line" data-line="9" data-tip="C21 = A21×B11 + A22×B21"><span class="line-num">9</span><span class="line-code">  C21<span class="op">=</span><span class="fn">rec_naive</span>(A21,B11)<span class="op">+</span><span class="fn">rec_naive</span>(A22,B21)</span></div>
-            <div class="line" data-line="10" data-tip="C22 = A21×B12 + A22×B22"><span class="line-num">10</span><span class="line-code">  C22<span class="op">=</span><span class="fn">rec_naive</span>(A21,B12)<span class="op">+</span><span class="fn">rec_naive</span>(A22,B22)</span></div>
-            <div class="line" data-line="11" data-tip="Join quadrants into result"><span class="line-num">11</span><span class="line-code">  <span class="kw">return</span> combine(C11,C12,C21,C22)</span></div>
+            <div class="line" data-line="7" data-tip="C11 = a×e + b×g"><span class="line-num">7</span><span class="line-code">  C11<span class="op">=</span><span class="fn">rec</span>(a,e)<span class="op">+</span><span class="fn">rec</span>(b,g)</span></div>
+            <div class="line" data-line="8" data-tip="C12 = a×f + b×h"><span class="line-num">8</span><span class="line-code">  C12<span class="op">=</span><span class="fn">rec</span>(a,f)<span class="op">+</span><span class="fn">rec</span>(b,h)</span></div>
+            <div class="line" data-line="9" data-tip="C21 = c×e + d×g"><span class="line-num">9</span><span class="line-code">  C21<span class="op">=</span><span class="fn">rec</span>(c,e)<span class="op">+</span><span class="fn">rec</span>(d,g)</span></div>
+            <div class="line" data-line="10" data-tip="C22 = c×f + d×h"><span class="line-num">10</span><span class="line-code">  C22<span class="op">=</span><span class="fn">rec</span>(c,f)<span class="op">+</span><span class="fn">rec</span>(d,h)</span></div>
+            <div class="line" data-line="11" data-tip="Join quadrants into result"><span class="line-num">11</span><span class="line-code">  <span class="kw">return</span> combine(C11, C12, C21, C22)</span></div>
           </div>
         </div>
       </div>
@@ -839,10 +839,10 @@ tbody tr:hover{background:rgba(108,138,255,.04)}
             <h4><span class="edu-num">2</span> The 8 Products</h4>
             <p>Each result quadrant needs exactly 2 recursive multiplications:</p>
             <div class="formula-box" style="text-align:left;font-size:.88rem;line-height:1.85;padding:10px 14px;margin:6px 0">
-              C<sub>11</sub> = A<sub>11</sub>&middot;B<sub>11</sub> + A<sub>12</sub>&middot;B<sub>21</sub><br>
-              C<sub>12</sub> = A<sub>11</sub>&middot;B<sub>12</sub> + A<sub>12</sub>&middot;B<sub>22</sub><br>
-              C<sub>21</sub> = A<sub>21</sub>&middot;B<sub>11</sub> + A<sub>22</sub>&middot;B<sub>21</sub><br>
-              C<sub>22</sub> = A<sub>21</sub>&middot;B<sub>12</sub> + A<sub>22</sub>&middot;B<sub>22</sub>
+              C<sub>11</sub> = a&middot;e + b&middot;g<br>
+              C<sub>12</sub> = a&middot;f + b&middot;h<br>
+              C<sub>21</sub> = c&middot;e + d&middot;g<br>
+              C<sub>22</sub> = c&middot;f + d&middot;h
             </div>
           </div>
           <div class="edu-section">
@@ -927,7 +927,7 @@ tbody tr:hover{background:rgba(108,138,255,.04)}
         <div class="card-header"><div class="icon icon-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h2>Why 7 Instead of 8?</h2></div>
         <div class="overview-text">
           <p>Naive block multiplication needs <strong>8 sub-matrix multiplications</strong> to compute 4 result quadrants (each needs 2). Strassen discovered that by <strong>combining quadrants before multiplying</strong>, you can compute 7 products whose results, when added/subtracted, yield all 4 result quadrants.</p>
-          <p>The trick: P1 = (A11+A22)(B11+B22) contributes to <em>multiple</em> result quadrants simultaneously. The 7 products share information through algebraic cancellation. The 14 extra additions are O(n&sup2;), which is dominated by the O(n<sup>2.807</sup>) recursive savings for large n.</p>
+          <p>The trick: P1 = (a+d)(e+h) contributes to <em>multiple</em> result quadrants simultaneously. The 7 products share information through algebraic cancellation. The 14 extra additions are O(n&sup2;), which is dominated by the O(n<sup>2.807</sup>) recursive savings for large n.</p>
         </div>
       </div>
 
@@ -1570,6 +1570,15 @@ function mr(v){return`<span class="m-res">${v}</span>`} // result (green)
 function mp(v){return`<span class="m-paren">${v}</span>`} // paren
 function mpc(name,color){return`<span class="m-pname" style="color:${color}">${name}</span>`} // product name colored
 
+// ── Display-name mapping: A11→a, B12→f, C21→r, etc. ──
+const QMAP={A11:'a',A12:'b',A21:'c',A22:'d',B11:'e',B12:'f',B21:'g',B22:'h'};
+/** Convert internal quadrant name to display letter */
+function ql(name){return QMAP[name]||name}
+/** Format a quadrant name as styled HTML: italic letter */
+function mq(name){const l=QMAP[name];return l?`<span class="m-var">${l}</span>`:mi(name[0],name.slice(1))}
+/** Format for SVG text: just the letter */
+function qlSvg(name){return QMAP[name]||name}
+
 /** Build the operation banner HTML for Strassen (math-style) */
 function buildStrassenOpBanner(eng,step){
   if(!step)return`<div class="viz-op-banner"><div class="math-line-xs" style="color:var(--text-muted);text-align:center;padding:6px 0">Click Build then Step or Play to see the live derivation.</div></div>`;
@@ -1585,17 +1594,16 @@ function buildStrassenOpBanner(eng,step){
   else if(step.action==='split'){
     const h=step.n/2;
     lines.push({cls:'math-line',tag:'op-tag-split',tl:'SPLIT',
-      h:`${mv('A')}${mo('\u2192')}${mp('[')}${mi('A','11')},&thinsp;${mi('A','12')},&thinsp;${mi('A','21')},&thinsp;${mi('A','22')}${mp(']')}`
-       +`&emsp;${mv('B')}${mo('\u2192')}${mp('[')}${mi('B','11')},&thinsp;${mi('B','12')},&thinsp;${mi('B','21')},&thinsp;${mi('B','22')}${mp(']')}`});
+      h:`${mv('A')}${mo('\u2192')}${mp('[')}${mq('A11')},&thinsp;${mq('A12')},&thinsp;${mq('A21')},&thinsp;${mq('A22')}${mp(']')}`
+       +`&emsp;${mv('B')}${mo('\u2192')}${mp('[')}${mq('B11')},&thinsp;${mq('B12')},&thinsp;${mq('B21')},&thinsp;${mq('B22')}${mp(']')}`});
     lines.push({cls:'math-line-xs',h:`Each quadrant is ${mn(h)}\u00d7${mn(h)}`});
   }
   else if(step.action==='prepare_product'&&step.leftOp&&step.rightOp){
     const lo=step.leftOp,ro=step.rightOp;
     const pLabel=pc?pc.label:step.product;
     function fmtOperand(op){
-      if(op.op==='id')return mi(op.names[0][0],op.names[0].slice(1));
-      const a=mi(op.names[0][0],op.names[0].slice(1)),b=mi(op.names[1][0],op.names[1].slice(1));
-      return`${mp('(')}${a}${mo(op.op==='add'?'+':'\u2212')}${b}${mp(')')}`;
+      if(op.op==='id')return mq(op.names[0]);
+      return`${mp('(')}${mq(op.names[0])}${mo(op.op==='add'?'+':'\u2212')}${mq(op.names[1])}${mp(')')}`;
     }
     // Line 1: symbolic formula
     lines.push({cls:'math-line',tag:'op-tag-mult',tl:pLabel,tc:pcC,
@@ -1647,13 +1655,13 @@ function buildStrassenOpBanner(eng,step){
       }
     }
     lines.push({cls:'math-line',tag:'op-tag-combine',tl:'COMBINE',
-      h:`${mr(step.quadrant)}${meq()}${fHtml}`});
+      h:`${mr(ql(step.quadrant))}${meq()}${fHtml}`});
     lines.push({cls:'math-line-sm',h:`${meq()}${mr(valStr)}`});
   }
   else if(step.action==='join'){
     const valStr=step.result?matStr(step.result):'';
     lines.push({cls:'math-line',tag:'op-tag-result',tl:'JOIN',
-      h:`${mv('C')}${meq()}${mp('[')}${mi('C','11')}&ensp;${mi('C','12')}&ensp;${mi('C','21')}&ensp;${mi('C','22')}${mp(']')}`});
+      h:`${mv('C')}${meq()}${mp('[')}${mq('C11')}&ensp;${mq('C12')}&ensp;${mq('C21')}&ensp;${mq('C22')}${mp(']')}`});
     if(valStr)lines.push({cls:'math-line-sm',h:`${mv('C')}${meq()}${mn(valStr)}`});
   }
   else{
@@ -1772,7 +1780,7 @@ function drawMatrix(M,mx,my,n,cs,gap,cellHL,showPart,prefix){
     const px=mx+h*(cs+gap)-gap/2,py=my+h*(cs+gap)-gap/2;
     s+=`<line x1="${px}" y1="${my-3}" x2="${px}" y2="${my+matW+3}" stroke="#5b6eae" stroke-width="1.5" stroke-dasharray="4,3"/>`;
     s+=`<line x1="${mx-3}" y1="${py}" x2="${mx+matW+3}" y2="${py}" stroke="#5b6eae" stroke-width="1.5" stroke-dasharray="4,3"/>`;
-    const lbls=[{t:prefix+'11',x:mx+2,y:my+8},{t:prefix+'12',x:mx+h*(cs+gap)+2,y:my+8},{t:prefix+'21',x:mx+2,y:my+h*(cs+gap)+8},{t:prefix+'22',x:mx+h*(cs+gap)+2,y:my+h*(cs+gap)+8}];
+    const lbls=[{t:qlSvg(prefix+'11'),x:mx+2,y:my+8},{t:qlSvg(prefix+'12'),x:mx+h*(cs+gap)+2,y:my+8},{t:qlSvg(prefix+'21'),x:mx+2,y:my+h*(cs+gap)+8},{t:qlSvg(prefix+'22'),x:mx+h*(cs+gap)+2,y:my+h*(cs+gap)+8}];
     for(const l of lbls)s+=`<text x="${l.x}" y="${l.y}" class="viz-quad-label">${l.t}</text>`;
   }
   return s;
@@ -1794,7 +1802,7 @@ function drawMatrixC(C,mx,my,n,cs,gap,showPart){
     s+=`<line x1="${mx-3}" y1="${py}" x2="${mx+matW+3}" y2="${py}" stroke="#5b6eae" stroke-width="1.5" stroke-dasharray="4,3"/>`;
     ['C11','C12','C21','C22'].forEach((lbl,i)=>{
       const qr=i<2?0:1,qc=i%2;
-      s+=`<text x="${mx+qc*h*(cs+gap)+2}" y="${my+qr*h*(cs+gap)+8}" class="viz-quad-label">${lbl}</text>`;
+      s+=`<text x="${mx+qc*h*(cs+gap)+2}" y="${my+qr*h*(cs+gap)+8}" class="viz-quad-label">${qlSvg(lbl)}</text>`;
     });
   }
   return s;
@@ -1929,16 +1937,16 @@ function renderNaiveRecurSvg(eng,step){
   }else if(step.action==='rn_split'){
     banner+=`<div class="math-line"><span class="op-type-tag op-tag-split">SPLIT</span>${mv('A')},${mv('B')} \u2192 4 quadrants of ${mn(step.n/2)}\u00d7${mn(step.n/2)}</div>`;
   }else if(step.action==='rn_multiply'){
-    banner+=`<div class="math-line"><span class="op-type-tag op-tag-mult">\u00d7</span>${mi(step.left[0],step.left.slice(1))}${mo('\u00d7')}${mi(step.right[0],step.right.slice(1))}${mo('\u2192')}${mr(step.cq)}</div>`;
+    banner+=`<div class="math-line"><span class="op-type-tag op-tag-mult">\u00d7</span>${mq(step.left)}${mo('\u00d7')}${mq(step.right)}${mo('\u2192')}${mr(ql(step.cq))}</div>`;
   }else if(step.action==='rn_prod_done'){
     const vs=step.result.length===1?String(step.result[0][0]):matStr(step.result);
-    banner+=`<div class="math-line"><span class="op-type-tag op-tag-result">\u2713</span>${mi(step.left[0],step.left.slice(1))}${mo('\u00d7')}${mi(step.right[0],step.right.slice(1))}${meq()}${mr(vs)}</div>`;
+    banner+=`<div class="math-line"><span class="op-type-tag op-tag-result">\u2713</span>${mq(step.left)}${mo('\u00d7')}${mq(step.right)}${meq()}${mr(vs)}</div>`;
   }else if(step.action==='rn_combine'){
     const vs=step.result.length===1?String(step.result[0][0]):matStr(step.result);
-    banner+=`<div class="math-line"><span class="op-type-tag op-tag-combine">ADD</span>${mr(step.quadrant)}${meq()}${mn(step.left1)}${mo('+')}${mn(step.left2)}</div>`;
+    banner+=`<div class="math-line"><span class="op-type-tag op-tag-combine">ADD</span>${mr(ql(step.quadrant))}${meq()}${mn(step.left1)}${mo('+')}${mn(step.left2)}</div>`;
     banner+=`<div class="math-line-sm">${meq()}${mr(vs)}</div>`;
   }else if(step.action==='rn_join'){
-    banner+=`<div class="math-line"><span class="op-type-tag op-tag-result">JOIN</span>${mv('C')}${meq()}combine(${mi('C','11')},${mi('C','12')},${mi('C','21')},${mi('C','22')})</div>`;
+    banner+=`<div class="math-line"><span class="op-type-tag op-tag-result">JOIN</span>${mv('C')}${meq()}combine(${mq('C11')},${mq('C12')},${mq('C21')},${mq('C22')})</div>`;
   }else{
     banner+=`<div class="math-line-xs">${step.explain||''}</div>`;
   }
