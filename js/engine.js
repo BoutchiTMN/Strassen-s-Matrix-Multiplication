@@ -125,7 +125,7 @@ function buildSteps(eng){
   if(eng.type==='strassen'){
     eng.result=strassenGenSteps(A,B,0,'top-level',eng.steps);
     buildRecursionTree(eng);
-    renderRecursionTree(eng,null);
+    renderGenericTree(eng.tree,eng.stepIdx,'dcTreeContainer',null,'#6c8aff');
     updateProductsSummary(eng,null);
   } else if(eng.type==='naiverecur'){
     eng.result=naiveRecurGenSteps(A,B,0,'top-level',eng.steps);
